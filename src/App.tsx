@@ -1,13 +1,20 @@
 import React from "react";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  BrowserRouter as Router,
+  Navigate,
+} from "react-router-dom";
 import {
   CheckEmailPage,
   ForgotPasswordPage,
   ResetPasswordPage,
   SignInPage,
   SignUpPage,
+  DashboardPage,
   UsernamePage,
-} from "./pages/auth";
+  CraftingPage,
+} from "./pages";
 
 const App: React.FC = () => {
   return (
@@ -21,7 +28,17 @@ const App: React.FC = () => {
           <Route path="/check-email" element={<CheckEmailPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/signup/username" element={<UsernamePage />} />
-          {/* Auth Routes */}
+          {/* Dashboard Routes */}
+          <Route path="/" element={<Navigate to={"/dashboard"} />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/dashboard/dates" element={<>Dates</>} />
+          <Route path="/dashboard/categories" element={<>categories</>} />
+          <Route path="/dashboard/identities" element={<>identities</>} />
+          <Route path="/dashboard/triggers" element={<>triggers</>} />
+          <Route path="/dashboard/predictions" element={<>predictions</>} />
+          <Route path="/dashboard/packs" element={<>packs</>} />
+          {/* Dashboard Routes */}
+          <Route path="/craft" element={<CraftingPage />} />
         </Routes>
       </Router>
     </>

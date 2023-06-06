@@ -23,11 +23,8 @@ export const SignUpForm: React.FC = () => {
 
   const handleSignIn = () => {
     const { isValid, errors } = signupFormValidation(form);
-    if (!isValid) {
-      setError(errors);
-    }
+    setError(errors);
     if (isValid) {
-      setError(errors);
       if (form.username === "moulee") {
         setError((prev) => ({
           ...prev,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ForgotPasswordText,
   FormActionText,
@@ -16,6 +16,7 @@ import {
 import { signinFormValidation } from "../../utils";
 
 export const SignInForm: React.FC = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState({ email: "", password: "" });
   const [form, setForm] = useState({ email: "", password: "" });
 
@@ -23,6 +24,7 @@ export const SignInForm: React.FC = () => {
     const { isValid, errors } = signinFormValidation(form);
     setError(errors);
     if (isValid) {
+      navigate("/dashboard");
     }
   };
 

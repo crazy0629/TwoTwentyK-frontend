@@ -21,3 +21,38 @@ export type checkEmailFormProps = {
   desc: string;
   onResend?: () => void;
 };
+
+export type AppHeaderMenuItemProps = {
+  label: string;
+  to: string;
+  children?: {
+    label: string;
+    to: string;
+  }[];
+};
+
+export type PredictionCardProps = {
+  date: string;
+  year: string | number;
+  type: string;
+  amount?: string | number;
+  image?: string;
+  name: string;
+  icon?: React.ReactNode;
+  iconText?: string;
+};
+
+export type FeedItemProps = {
+  date: string;
+  image: string;
+  title: string;
+  desc: string;
+  tags: string[];
+};
+
+export type NotificationProps = {
+  date: string;
+  title: string;
+  desc: string;
+  isNew: boolean;
+};

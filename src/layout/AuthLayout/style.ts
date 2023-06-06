@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const AuthLayoutWrapper = styled.div`
-  background: #f2f5ff;
   min-height: 100vh;
   position: relative;
   display: flex;
@@ -33,12 +32,8 @@ export const HeaderWrapper = styled.div`
 
 export const HeaderContainer = styled.div`
   width: 95%;
-  font-family: "Jockey One";
   margin: auto;
   max-width: 1280px;
-  font-weight: 400;
-  font-size: 31.0881px;
-  line-height: 43px;
 `;
 
 export const FooterWrapper = styled.div`
