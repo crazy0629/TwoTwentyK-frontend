@@ -14,6 +14,7 @@ import {
   DashboardPage,
   UsernamePage,
   CraftingPage,
+  DatesPage,
 } from "./pages";
 
 const App: React.FC = () => {
@@ -31,7 +32,7 @@ const App: React.FC = () => {
           {/* Dashboard Routes */}
           <Route path="/" element={<Navigate to={"/dashboard"} />} />
           <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/dashboard/dates" element={<>Dates</>} />
+          <Route path="/dashboard/dates" element={<DatesPage />} />
           <Route path="/dashboard/categories" element={<>categories</>} />
           <Route path="/dashboard/identities" element={<>identities</>} />
           <Route path="/dashboard/triggers" element={<>triggers</>} />

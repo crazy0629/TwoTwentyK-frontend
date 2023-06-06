@@ -31,7 +31,11 @@ export const Header: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<AppHeaderMenuItemProps>();
 
   useEffect(() => {
-    setCurrentPath(headerData.filter((f) => f.to === location.pathname)[0]);
+    setCurrentPath(
+      headerData.filter(
+        (f) => f.to === "/" + location.pathname.split("/")[1]
+      )[0]
+    );
   }, [location]);
 
   return (
@@ -80,8 +84,12 @@ export const Header: React.FC = () => {
             {currentPath?.children.map((item, key) => (
               <SubMenuItem
                 key={key}
-                to={item.to}
-                active={location.pathname === item.to ? "true" : undefined}
+                to={currentPath.to + "/" + item.to}
+                active={
+                  location.pathname.split("/")[2] === item.to
+                    ? "true"
+                    : undefined
+                }
               >
                 {item.label}
               </SubMenuItem>
