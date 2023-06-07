@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 export const FormWrapper = styled.div`
+  width: 100%;
   p {
     font-weight: 600;
     font-size: 14px;
@@ -17,10 +18,11 @@ export const FormWrapper = styled.div`
 `;
 
 export const InputWrapper = styled.div<{ iserror?: string; suffix?: string }>`
-  border: 1px solid ${({ iserror }) => (iserror ? "#ff0000" : "#000000")};
+  border: 1px solid ${({ iserror }) => (iserror ? "#ff0000" : "#E4E4E4")};
   border-radius: 4px;
   display: flex;
   align-items: center;
+  background-color: #fff;
   position: relative;
 
   input {

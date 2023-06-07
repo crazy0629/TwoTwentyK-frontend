@@ -56,3 +56,51 @@ export type NotificationProps = {
   desc: string;
   isNew: boolean;
 };
+
+export type DateCardProps = {
+  type: string;
+  image: string;
+  name: string;
+  isNotHover?: boolean;
+  onView?: () => void;
+  onCraft?: () => void;
+  onSell?: () => void;
+};
+
+export type DateCardGridProps = {
+  data: Array<DateCardProps>;
+  onView?: (id: string | number) => void;
+  onCraft?: (id: string | number) => void;
+  onSell?: (id: string | number) => void;
+};
+
+export type ViewDateCardProps = {
+  isView: boolean;
+  onClose: () => void;
+  id: string | number;
+};
+
+export type SellDateCardProps = {
+  onSellConfirm: () => void;
+} & ViewDateCardProps;
+
+export type ModalProps = {
+  width?: number;
+  onClose: () => void;
+  open: boolean;
+} & React.HTMLAttributes<HTMLElement>;
+
+export type SellModalProps = {} & ModalProps;
+
+export type SelectBoxProps = {
+  placeholder?: string;
+  value?: string;
+  isFilter?: boolean;
+  options: SelectOptionProps[];
+};
+
+export type SelectOptionProps = {
+  label: string;
+  value: string;
+  checked?: boolean;
+};

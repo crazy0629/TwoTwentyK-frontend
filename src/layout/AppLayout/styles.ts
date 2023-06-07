@@ -7,6 +7,7 @@ export const HeaderWrapper = styled.div`
   position: fixed;
   width: 100%;
   z-index: 10;
+  backdrop-filter: blur(5px);
   top: 0;
   left: 0;
 `;
