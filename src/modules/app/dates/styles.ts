@@ -158,6 +158,7 @@ export const PriceItem = styled.div`
 export const CloseButton = styled.div`
   display: flex;
   position: absolute;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
   font-size: 30px;

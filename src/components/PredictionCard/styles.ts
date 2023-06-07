@@ -22,7 +22,7 @@ export const PredictionCardWrapper = styled.div<{
   flex-direction: column;
   justify-content: space-between;
   ${({ isnothover }) =>
-    !isnothover &&
+    isnothover &&
     `
     &:hover {
       z-index: 2;

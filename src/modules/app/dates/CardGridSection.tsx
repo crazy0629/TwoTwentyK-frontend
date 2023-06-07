@@ -36,6 +36,7 @@ export const CardGridSection: React.FC<DateCardGridProps> = ({
       {identityData?.map((item, key) => (
         <PredictionCard
           height={293}
+          isNotHover={true}
           key={key}
           {...item}
           onCraft={() => (onCraft ? onCraft("id") : {})}
