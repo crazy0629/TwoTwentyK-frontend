@@ -13,10 +13,12 @@ import {
   SignUpPage,
   DashboardPage,
   UsernamePage,
-  CraftingPage,
   DatesPage,
   TriggersPage,
   IdentitiesPage,
+  PredictionsPage,
+  CommingSoonPage,
+  NotFoundPage,
 } from "./pages";
 
 const App: React.FC = () => {
@@ -35,13 +37,17 @@ const App: React.FC = () => {
           <Route path="/" element={<Navigate to={"/dashboard"} />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/dashboard/dates" element={<DatesPage />} />
-          <Route path="/dashboard/categories" element={<>categories</>} />
+          <Route path="/dashboard/categories" element={<CommingSoonPage />} />
           <Route path="/dashboard/identities" element={<IdentitiesPage />} />
           <Route path="/dashboard/triggers" element={<TriggersPage />} />
-          <Route path="/dashboard/predictions" element={<>predictions</>} />
-          <Route path="/dashboard/packs" element={<>packs</>} />
+          <Route path="/dashboard/predictions" element={<PredictionsPage />} />
+          <Route path="/dashboard/packs" element={<CommingSoonPage />} />
           {/* Dashboard Routes */}
-          <Route path="/craft" element={<CraftingPage />} />
+          <Route path="/crafting" element={<CommingSoonPage />} />
+          <Route path="/buy" element={<CommingSoonPage />} />
+          <Route path="/marketplace" element={<CommingSoonPage />} />
+          <Route path="/learn" element={<CommingSoonPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </>

@@ -34,6 +34,8 @@ export const ViewDateCardSection: React.FC<ViewDateCardProps> = ({
             ? "Trigger"
             : cardType === "identity"
             ? "Identity"
+            : cardType === "prediction"
+            ? "Prediction"
             : "Date Card"}
         </h2>
         <PreviewCardWrapper>
@@ -48,6 +50,16 @@ export const ViewDateCardSection: React.FC<ViewDateCardProps> = ({
               year={2023}
               icon={<IconCardAthlete />}
               iconText="Athlete"
+            />
+          ) : cardType === "prediction" ? (
+            <PredictionCard
+              date="06/06"
+              name="Tom Brady"
+              type="Rare"
+              height={293}
+              year={2023}
+              amount={3}
+              image="/assets/nfts/1.png"
             />
           ) : (
             <DateCard

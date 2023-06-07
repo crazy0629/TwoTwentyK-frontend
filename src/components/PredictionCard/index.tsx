@@ -57,7 +57,7 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({
         <CardButtonGroup>
           <CardButton onClick={onView}>View</CardButton>
           <CardButton onClick={onCraft}>Craft Prediction</CardButton>
-          <CardButton onClick={onSell}>Cancel Listing</CardButton>
+          <CardButton onClick={onSell}>Sell</CardButton>
         </CardButtonGroup>
       </CardOverlayWrapper>
     </PredictionCardWrapper>

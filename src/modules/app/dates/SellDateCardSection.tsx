@@ -12,7 +12,14 @@ import {
   ViewDateCardWrapper,
 } from "./styles";
 import { SellDateCardProps } from "../../../types";
-import { Button, DateCard, IconArrowDown, Input } from "../../../components";
+import {
+  Button,
+  DateCard,
+  IconArrowDown,
+  IconCardAthlete,
+  Input,
+  PredictionCard,
+} from "../../../components";
 import { TriggerCard } from "../../../components/TriggerCard";
 
 export const SellDateCardSection: React.FC<SellDateCardProps> = ({
@@ -30,6 +37,26 @@ export const SellDateCardSection: React.FC<SellDateCardProps> = ({
         <PreviewCardWrapper>
           {cardType === "trigger" ? (
             <TriggerCard image="" name="2005" type="Rare" isNotHover={true} />
+          ) : cardType === "identity" ? (
+            <PredictionCard
+              date="06/06"
+              name="Athlete"
+              type="Rare"
+              height={293}
+              year={2023}
+              icon={<IconCardAthlete />}
+              iconText="Athlete"
+            />
+          ) : cardType === "prediction" ? (
+            <PredictionCard
+              date="06/06"
+              name="Tom Brady"
+              type="Rare"
+              height={293}
+              year={2023}
+              amount={3}
+              image="/assets/nfts/1.png"
+            />
           ) : (
             <DateCard
               image="/assets/nfts/1.png"

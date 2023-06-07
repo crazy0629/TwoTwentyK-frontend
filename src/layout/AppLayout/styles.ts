@@ -95,8 +95,11 @@ export const SubMenuItem = styled(Link)<{ active?: string }>`
   }
 `;
 
-export const AppContainer = styled.div`
-  padding-top: 125px;
+export const AppContainer = styled.div<{ issubmenu?: string }>`
+  padding-top: ${({ issubmenu }) => (issubmenu ? "125px" : "76px")};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const HeaderButtonGroup = styled.div`
