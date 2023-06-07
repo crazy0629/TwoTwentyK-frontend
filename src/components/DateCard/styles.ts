@@ -4,7 +4,10 @@ export const DateCardWrapper = styled.div<{ bg: string; isnothover?: string }>`
   width: 100%;
   height: 293px;
   position: relative;
-  background: ${({ bg }) => (bg ? `url(${bg}) no-repeat, #fff` : "")};
+  background: ${({ bg }) =>
+    bg
+      ? `url(${bg}) no-repeat, #fff`
+      : "linear-gradient(0deg, #CDCDCD, #CDCDCD), url(.png), #FFFFFF"};
   background-blend-mode: luminosity, normal;
   background-position: center;
   background-size: cover;
@@ -71,6 +74,10 @@ export const CardTooltip = styled.div`
   position: absolute;
   top: 3px;
   right: 4px;
+  &.left {
+    left: 4px;
+    right: auto;
+  }
   display: flex;
   align-items: center;
   justify-content: center;

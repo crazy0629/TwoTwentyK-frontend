@@ -69,6 +69,7 @@ export type DateCardProps = {
 
 export type DateCardGridProps = {
   data: Array<DateCardProps>;
+  cardType?: string;
   onView?: (id: string | number) => void;
   onCraft?: (id: string | number) => void;
   onSell?: (id: string | number) => void;
@@ -76,7 +77,9 @@ export type DateCardGridProps = {
 
 export type ViewDateCardProps = {
   isView: boolean;
+
   onClose: () => void;
+  cardType?: string;
   id: string | number;
 };
 

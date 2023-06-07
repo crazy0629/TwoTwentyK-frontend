@@ -13,9 +13,11 @@ import {
 } from "./styles";
 import { SellDateCardProps } from "../../../types";
 import { Button, DateCard, IconArrowDown, Input } from "../../../components";
+import { TriggerCard } from "../../../components/TriggerCard";
 
 export const SellDateCardSection: React.FC<SellDateCardProps> = ({
   id,
+  cardType,
   isView,
   onClose,
   onSellConfirm,
@@ -24,14 +26,18 @@ export const SellDateCardSection: React.FC<SellDateCardProps> = ({
     <ViewDateCardWrapper isview={isView ? "true" : undefined}>
       <ViewDateCardContainer>
         <CloseButton onClick={onClose}>&times;</CloseButton>
-        <h2>Sell Date Card</h2>
+        <h2>Sell {cardType === "trigger" ? "Trigger" : "Date Card"}</h2>
         <PreviewCardWrapper>
-          <DateCard
-            image="/assets/nfts/1.png"
-            name="2005"
-            type="Rare"
-            isNotHover={true}
-          />
+          {cardType === "trigger" ? (
+            <TriggerCard image="" name="2005" type="Rare" isNotHover={true} />
+          ) : (
+            <DateCard
+              image="/assets/nfts/1.png"
+              name="2005"
+              type="Rare"
+              isNotHover={true}
+            />
+          )}
         </PreviewCardWrapper>
         <PropertiesWrapper>
           <PropertiesHeader>
@@ -44,15 +50,15 @@ export const SellDateCardSection: React.FC<SellDateCardProps> = ({
               <span>Rare</span>
             </PropertyItem>
             <PropertyItem>
-              <p>Type</p>
+              <p>{cardType === "trigger" ? "Category" : "Type"}</p>
               <span>Year</span>
             </PropertyItem>
             <PropertyItem>
-              <p>Year</p>
+              <p>{cardType === "trigger" ? "Trigger Type" : "Year"}</p>
               <span>2023</span>
             </PropertyItem>
             <PropertyItem>
-              <p>Collection</p>
+              <p>{cardType === "trigger" ? "Trigger" : "Collection"}</p>
               <span>Sports Series</span>
             </PropertyItem>
           </PropertiesContent>

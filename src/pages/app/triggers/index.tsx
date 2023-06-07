@@ -6,7 +6,7 @@ import {
   DatePageTitleWrapper,
   DatesPageWrapper,
   EmptyCards,
-} from "./styles";
+} from "../dates/styles";
 import { Button, SellConfirmModal } from "../../../components";
 import {
   CardGridSection,
@@ -14,9 +14,9 @@ import {
   SellDateCardSection,
   ViewDateCardSection,
 } from "../../../modules";
-import { dateCardData } from "./data";
+import { triggerCardData } from "./data";
 
-export const DatesPage: React.FC = () => {
+export const TriggersPage: React.FC = () => {
   const [isView, setIsView] = useState<"view" | "sell" | "">("");
 
   const [modal, setModal] = useState(false);
@@ -38,11 +38,11 @@ export const DatesPage: React.FC = () => {
   return (
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
-      {dateCardData.length > 0 ? (
+      {triggerCardData.length > 0 ? (
         <DatesPageWrapper isview={isView ? "true" : undefined}>
           <DatePageContainer>
             <DatePageTitleWrapper>
-              <h3>Date Cards</h3>
+              <h3>Triggers</h3>
               <ButtonGroup>
                 <Button className="buy-button">Buy Cards</Button>
                 <Button className="buy-button">Buy Packs</Button>
@@ -50,19 +50,22 @@ export const DatesPage: React.FC = () => {
             </DatePageTitleWrapper>
             <FilterSection />
             <CardGridSection
-              data={dateCardData}
+              data={triggerCardData}
+              cardType={"trigger"}
               onCraft={handleCraft}
               onSell={handleSell}
               onView={handleView}
             />
             <ViewDateCardSection
               isView={isView === "view"}
+              cardType="trigger"
               id={"asdfa"}
               onClose={() => setIsView("")}
             />
             <SellDateCardSection
               onSellConfirm={handleSellConfirm}
               isView={isView === "sell"}
+              cardType="trigger"
               id={"asdfa"}
               onClose={() => setIsView("")}
             />
@@ -70,8 +73,8 @@ export const DatesPage: React.FC = () => {
         </DatesPageWrapper>
       ) : (
         <EmptyCards>
-          <h3>No Date Cards</h3>
-          <p>It looks like you don’t have any date cards yet. </p>
+          <h3>No Triggers</h3>
+          <p>It looks like you don’t have any triggers yet.   </p>
           <Button className="buy-button">Buy Cards</Button>
           <Button className="buy-button">Buy Packs</Button>
         </EmptyCards>

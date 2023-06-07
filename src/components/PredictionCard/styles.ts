@@ -22,8 +22,24 @@ export const PredictionCardWrapper = styled.div<{ bg?: string }>`
 export const CardTopWrapper = styled.div`
   display: flex;
   color: #fff;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
+  & > div.trigger {
+    font-weight: 600;
+    font-size: 9.91751px;
+    line-height: 10px;
+    display: flex;
+    align-items: center;
+    padding: 9px;
+    &::before {
+      width: 4px;
+      height: 4px;
+      content: "";
+      background-color: #fff;
+      margin-right: 5px;
+      border-radius: 4px;
+    }
+  }
 `;
 
 export const CardBottomWrapper = styled.div`
@@ -61,7 +77,7 @@ export const CardDateWrapper = styled.div`
 `;
 
 export const CardTypeWrapper = styled.div`
-  height: 23px;
+  height: 30px;
   max-width: 62px;
   font-weight: 400;
   font-size: 10.7747px;
