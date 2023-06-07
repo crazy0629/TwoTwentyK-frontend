@@ -38,8 +38,13 @@ export type PredictionCardProps = {
   amount?: string | number;
   image?: string;
   name: string;
+  height?: number;
   icon?: React.ReactNode;
   iconText?: string;
+  isNotHover?: boolean;
+  onView?: () => void;
+  onCraft?: () => void;
+  onSell?: () => void;
 };
 
 export type FeedItemProps = {
@@ -68,7 +73,8 @@ export type DateCardProps = {
 };
 
 export type DateCardGridProps = {
-  data: Array<DateCardProps>;
+  data?: Array<DateCardProps>;
+  identityData?: Array<PredictionCardProps>;
   cardType?: string;
   onView?: (id: string | number) => void;
   onCraft?: (id: string | number) => void;

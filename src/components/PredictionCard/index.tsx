@@ -9,6 +9,11 @@ import {
   PredictionCardWrapper,
 } from "./styles";
 import { PredictionCardProps } from "../../types";
+import {
+  CardButton,
+  CardButtonGroup,
+  CardOverlayWrapper,
+} from "../DateCard/styles";
 
 export const PredictionCard: React.FC<PredictionCardProps> = ({
   image,
@@ -16,12 +21,21 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({
   date,
   name,
   type,
+  height,
   year,
   icon,
   iconText,
+  isNotHover,
+  onCraft,
+  onSell,
+  onView,
 }) => {
   return (
-    <PredictionCardWrapper bg={image}>
+    <PredictionCardWrapper
+      bg={image}
+      height={height}
+      isnothover={isNotHover ? "true" : undefined}
+    >
       <CardTopWrapper>
         <CardDateWrapper>
           <div className="date">{date}</div>
@@ -39,6 +53,13 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({
         {amount && <AmountWrapper>{amount}</AmountWrapper>}
         {name}
       </CardBottomWrapper>
+      <CardOverlayWrapper className="overlay">
+        <CardButtonGroup>
+          <CardButton onClick={onView}>View</CardButton>
+          <CardButton onClick={onCraft}>Craft Prediction</CardButton>
+          <CardButton onClick={onSell}>Cancel Listing</CardButton>
+        </CardButtonGroup>
+      </CardOverlayWrapper>
     </PredictionCardWrapper>
   );
 };

@@ -10,7 +10,12 @@ import {
   ViewDateCardContainer,
   ViewDateCardWrapper,
 } from "./styles";
-import { DateCard, IconArrowDown } from "../../../components";
+import {
+  DateCard,
+  IconArrowDown,
+  IconCardAthlete,
+  PredictionCard,
+} from "../../../components";
 import { TriggerCard } from "../../../components/TriggerCard";
 
 export const ViewDateCardSection: React.FC<ViewDateCardProps> = ({
@@ -23,10 +28,27 @@ export const ViewDateCardSection: React.FC<ViewDateCardProps> = ({
     <ViewDateCardWrapper isview={isView ? "true" : undefined}>
       <ViewDateCardContainer>
         <CloseButton onClick={onClose}>&times;</CloseButton>
-        <h2>View {cardType === "trigger" ? "Trigger" : "Date Card"}</h2>
+        <h2>
+          View{" "}
+          {cardType === "trigger"
+            ? "Trigger"
+            : cardType === "identity"
+            ? "Identity"
+            : "Date Card"}
+        </h2>
         <PreviewCardWrapper>
           {cardType === "trigger" ? (
             <TriggerCard image="" name="2005" type="Rare" isNotHover={true} />
+          ) : cardType === "identity" ? (
+            <PredictionCard
+              date="06/06"
+              name="Athlete"
+              type="Rare"
+              height={293}
+              year={2023}
+              icon={<IconCardAthlete />}
+              iconText="Athlete"
+            />
           ) : (
             <DateCard
               image="/assets/nfts/1.png"
@@ -47,7 +69,13 @@ export const ViewDateCardSection: React.FC<ViewDateCardProps> = ({
               <span>Rare</span>
             </PropertyItem>
             <PropertyItem>
-              <p>{cardType === "trigger" ? "Category" : "Type"}</p>
+              <p>
+                {cardType === "trigger"
+                  ? "Category"
+                  : cardType === "identity"
+                  ? "Day/Month"
+                  : "Type"}
+              </p>
               <span>Year</span>
             </PropertyItem>
             <PropertyItem>
@@ -55,7 +83,13 @@ export const ViewDateCardSection: React.FC<ViewDateCardProps> = ({
               <span>2023</span>
             </PropertyItem>
             <PropertyItem>
-              <p>{cardType === "trigger" ? "Trigger" : "Collection"}</p>
+              <p>
+                {cardType === "trigger"
+                  ? "Trigger"
+                  : cardType === "identity"
+                  ? "Category"
+                  : "Collection"}
+              </p>
               <span>Sports Series</span>
             </PropertyItem>
           </PropertiesContent>

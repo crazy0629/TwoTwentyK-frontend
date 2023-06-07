@@ -34,9 +34,13 @@ export const DatePageTitleWrapper = styled.div`
 
 export const ButtonGroup = styled.div`
   display: flex;
+
   .buy-button {
     height: 51px;
     width: 118px;
+  }
+  .craft-button {
+    width: 203px;
   }
   & > :not(:first-child) {
     margin-left: 19px;
@@ -66,6 +70,8 @@ export const EmptyCards = styled.div`
   p {
     font-weight: 400;
     font-size: 16px;
+    max-width: 341px;
+    text-align: center;
     line-height: 24px;
   }
   .buy-button {

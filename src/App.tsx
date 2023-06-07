@@ -16,6 +16,7 @@ import {
   CraftingPage,
   DatesPage,
   TriggersPage,
+  IdentitiesPage,
 } from "./pages";
 
 const App: React.FC = () => {
@@ -35,7 +36,7 @@ const App: React.FC = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/dashboard/dates" element={<DatesPage />} />
           <Route path="/dashboard/categories" element={<>categories</>} />
-          <Route path="/dashboard/identities" element={<>identities</>} />
+          <Route path="/dashboard/identities" element={<IdentitiesPage />} />
           <Route path="/dashboard/triggers" element={<TriggersPage />} />
           <Route path="/dashboard/predictions" element={<>predictions</>} />
           <Route path="/dashboard/packs" element={<>packs</>} />

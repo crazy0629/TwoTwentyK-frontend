@@ -1,19 +1,20 @@
 import React from "react";
 import { CardGridWrapper } from "./styles";
 import { DateCardGridProps } from "../../../types";
-import { DateCard } from "../../../components";
+import { DateCard, PredictionCard } from "../../../components";
 import { TriggerCard } from "../../../components/TriggerCard";
 
 export const CardGridSection: React.FC<DateCardGridProps> = ({
   data,
   cardType,
+  identityData,
   onCraft,
   onSell,
   onView,
 }) => {
   return (
     <CardGridWrapper>
-      {data.map((item, key) =>
+      {data?.map((item, key) =>
         cardType === "trigger" ? (
           <TriggerCard
             key={key}
@@ -32,6 +33,16 @@ export const CardGridSection: React.FC<DateCardGridProps> = ({
           />
         )
       )}
+      {identityData?.map((item, key) => (
+        <PredictionCard
+          height={293}
+          key={key}
+          {...item}
+          onCraft={() => (onCraft ? onCraft("id") : {})}
+          onView={() => (onView ? onView("id") : {})}
+          onSell={() => (onSell ? onSell("id") : {})}
+        />
+      ))}
     </CardGridWrapper>
   );
 };

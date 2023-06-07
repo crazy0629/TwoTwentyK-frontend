@@ -45,12 +45,25 @@ export const SellDateCardSection: React.FC<SellDateCardProps> = ({
             <IconArrowDown />
           </PropertiesHeader>
           <PropertiesContent>
+            {cardType === "identity" && (
+              <PropertyItem>
+                <p>Identity Match</p>
+                <span>Tom Brady</span>
+              </PropertyItem>
+            )}
             <PropertyItem>
               <p>Rarity</p>
               <span>Rare</span>
             </PropertyItem>
+
             <PropertyItem>
-              <p>{cardType === "trigger" ? "Category" : "Type"}</p>
+              <p>
+                {cardType === "trigger"
+                  ? "Category"
+                  : cardType === "identity"
+                  ? "Day/Month"
+                  : "Type"}
+              </p>
               <span>Year</span>
             </PropertyItem>
             <PropertyItem>
@@ -58,9 +71,21 @@ export const SellDateCardSection: React.FC<SellDateCardProps> = ({
               <span>2023</span>
             </PropertyItem>
             <PropertyItem>
-              <p>{cardType === "trigger" ? "Trigger" : "Collection"}</p>
+              <p>
+                {cardType === "trigger"
+                  ? "Trigger"
+                  : cardType === "identity"
+                  ? "Category"
+                  : "Collection"}
+              </p>
               <span>Sports Series</span>
             </PropertyItem>
+            {cardType === "identity" && (
+              <PropertyItem>
+                <p>Collection</p>
+                <span>Sports Series</span>
+              </PropertyItem>
+            )}
           </PropertiesContent>
         </PropertiesWrapper>
         <SetPriceWrapper>

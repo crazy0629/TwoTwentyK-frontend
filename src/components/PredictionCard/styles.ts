@@ -1,6 +1,10 @@
 import { styled } from "styled-components";
 
-export const PredictionCardWrapper = styled.div<{ bg?: string }>`
+export const PredictionCardWrapper = styled.div<{
+  bg?: string;
+  height?: number;
+  isnothover?: string;
+}>`
   position: relative;
   width: 100%;
   contain: content;
@@ -9,14 +13,25 @@ export const PredictionCardWrapper = styled.div<{ bg?: string }>`
   background: ${({ bg }) =>
     bg
       ? `url(${bg}) no-repeat, #fff `
-      : "linear-gradient(0deg, #F2F2F2, #F2F2F2), #FFFFFF;"};
+      : "linear-gradient(0deg, #fff, #fff), #FFFFFF;"};
   background-blend-mode: luminosity;
   background-size: cover;
   background-position: center;
-  height: 225px;
+  height: ${({ height }) => (height ? height + "px" : "225px")};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${({ isnothover }) =>
+    !isnothover &&
+    `
+    &:hover {
+      z-index: 2;
+      .overlay {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  `}
 `;
 
 export const CardTopWrapper = styled.div`
