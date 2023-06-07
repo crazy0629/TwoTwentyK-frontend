@@ -18,9 +18,9 @@ export const NotFoundWrapper = styled.div`
     font-size: 24px;
     line-height: 160%;
     margin-top: 10px;
-    margin-bottom: 32px;
   }
   .not-found-button {
+    margin-top: 32px;
     width: 300px;
     height: 50px;
   }
