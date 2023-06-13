@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
-export const AppLayoutWrapper = styled.div``;
+export const AppLayoutWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
 
 export const HeaderWrapper = styled.div`
   position: fixed;
@@ -100,11 +104,19 @@ export const AppContainer = styled.div<{ issubmenu?: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
 `;
 
 export const HeaderButtonGroup = styled.div`
   display: flex;
   align-items: center;
+  .login-button {
+    width: 124px;
+    height: 47px;
+    & > :not(:first-child) {
+      margin-left: 16px;
+    }
+  }
   & > :not(:first-child) {
     margin-left: 18px;
   }
@@ -126,6 +138,10 @@ export const HeaderButton = styled.div<{ width?: number }>`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.05);
+  &.active {
+    background: #636363;
+    color: #fff;
+  }
   box-shadow: 1px 1.5px 3px rgba(0, 0, 0, 0.2);
   border-radius: 7.04px;
   font-weight: 600;
@@ -162,13 +178,26 @@ export const MobileMenuButton = styled.div`
   }
 `;
 
-export const NotificationWrapper = styled.div`
+export const CloseButton = styled.div`
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  right: 17px;
+  top: 12px;
+`;
+
+export const NotificationWrapper = styled.div<{ open: boolean }>`
   position: absolute;
   right: 0;
   z-index: 11;
   top: 60px;
   width: 400px;
   padding: 20px 25px;
+  opacity: ${({ open }) => (open ? 1 : 0)};
+  visibility: ${({ open }) => (open ? "visible" : "hidden")};
   background: #ffffff;
   box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
   border-radius: 8px;

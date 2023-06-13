@@ -1,8 +1,8 @@
 import React from "react";
 import { NotificationItemWrapper, NotificationTitleWrapper } from "./styles";
-import { NotificationProps } from "../../types";
+import { NotificationItemProps } from "../../types";
 
-export const NotificationItem: React.FC<NotificationProps> = ({
+export const NotificationItem: React.FC<NotificationItemProps> = ({
   date,
   desc,
   isNew,

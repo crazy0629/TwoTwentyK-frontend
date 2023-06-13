@@ -3,23 +3,37 @@ import { styled } from "styled-components";
 export const SelectBoxWrapper = styled.div`
   width: 100%;
   position: relative;
+  & > p {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    margin-bottom: 6px;
+  }
 `;
 
-export const SelectBoxContainer = styled.div`
+export const SelectBoxContainer = styled.div<{ border?: string }>`
   background: #ffffff;
-  border-radius: 8px;
-  height: 51px;
+  border-radius: 4px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 10px 0 24px;
   cursor: pointer;
+  border: 1px solid ${({ border }) => (border ? "#E4E4E4" : "transparent")};
 `;
 
 export const SelectBoxTextWrapper = styled.div`
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
+  display: flex;
+  align-items: center;
+  img {
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+  }
   span {
     opacity: 0.5;
   }
@@ -28,7 +42,7 @@ export const SelectBoxTextWrapper = styled.div`
 export const SelectOptionsWrapper = styled.div<{ open?: string }>`
   position: absolute;
   padding: 10px 24px;
-  top: 55px;
+  margin-top: 10px;
   opacity: ${({ open }) => (open ? 1 : 0)};
   visibility: ${({ open }) => (open ? "visible" : "hidden")};
   left: 0;
@@ -48,6 +62,13 @@ export const OptionItem = styled.label`
   line-height: 17px;
   padding: 12px 0;
   cursor: pointer;
+  div {
+    display: flex;
+    align-items: center;
+    img {
+      margin-right: 10px;
+    }
+  }
 `;
 
 export const OptionGroup = styled.div`

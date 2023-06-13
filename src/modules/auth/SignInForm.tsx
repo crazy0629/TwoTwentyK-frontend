@@ -24,6 +24,7 @@ export const SignInForm: React.FC = () => {
     const { isValid, errors } = signinFormValidation(form);
     setError(errors);
     if (isValid) {
+      localStorage.setItem("auth", form.email);
       navigate("/dashboard");
     }
   };

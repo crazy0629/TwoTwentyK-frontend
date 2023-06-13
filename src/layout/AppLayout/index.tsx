@@ -3,6 +3,7 @@ import { AppContainer, AppLayoutWrapper } from "./styles";
 import { Header } from "./Header";
 import { useLocation } from "react-router-dom";
 import { headerData } from "./data";
+import { Footer } from "../AuthLayout/Footer";
 
 export const AppLayout: React.FC<React.HTMLAttributes<HTMLElement>> = ({
   children,
@@ -24,6 +25,7 @@ export const AppLayout: React.FC<React.HTMLAttributes<HTMLElement>> = ({
       <AppContainer issubmenu={isSubmenu ? "true" : undefined}>
         {children}
       </AppContainer>
+      <Footer />
     </AppLayoutWrapper>
   );
 };

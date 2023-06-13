@@ -23,10 +23,25 @@ export const headerData = [
   {
     label: "Marketplace",
     to: "/marketplace",
+    children: [
+      { label: "Cards", to: "" },
+      { label: "Identities", to: "identities" },
+      { label: "Predictions", to: "predictions" },
+      { label: "Card Packs", to: "packs" },
+    ],
   },
   {
     label: "Learn to play",
     to: "/learn",
+  },
+  {
+    label: "",
+    to: "/profile",
+    children: [
+      { label: "Profile", to: "" },
+      { label: "Claims", to: "claims" },
+      { label: "Transactions", to: "transactions" },
+    ],
   },
 ];
 

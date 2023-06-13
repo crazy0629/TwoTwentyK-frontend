@@ -15,20 +15,38 @@ import {
   SubMenuItem,
 } from "./styles";
 import {
+  BalanceForWithdrawModal,
+  Button,
   HeaderLogo,
   IconAlarm,
   IconCoins,
+  IconLogout,
   IconMenu,
   IconProfile,
+  WithdrawConfirmModal,
+  WithdrawModal,
 } from "../../components";
 import { headerData } from "./data";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AppHeaderMenuItemProps } from "../../types";
-// import { Notification } from "./Notification";
+import { Notification } from "./Notification";
 
 export const Header: React.FC = () => {
+  const navigate = useNavigate();
   const location = useLocation();
+  const [notification, setNotification] = useState(false);
+  const [balanceModal, setBalanceModal] = useState(false);
+  const [withdrawModal, setWithdrawModal] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
+  const [withdrawStatus, setWithdrawStatus] = useState<"success" | "failed">(
+    "failed"
+  );
   const [currentPath, setCurrentPath] = useState<AppHeaderMenuItemProps>();
+  const [currentUser, setCurrentUser] = useState<string | null>("");
+
+  useEffect(() => {
+    setCurrentUser(localStorage.getItem("auth"));
+  }, []);
 
   useEffect(() => {
     setCurrentPath(
@@ -38,65 +56,118 @@ export const Header: React.FC = () => {
     );
   }, [location]);
 
+  const handleWithdraw = () => {
+    setBalanceModal(false);
+    setWithdrawModal(true);
+  };
+
+  const handleWithdrawClick = () => {
+    setBalanceModal(true);
+  };
+
+  const handleConfirmWithdraw = (status?: boolean) => {
+    setWithdrawStatus(status ? "success" : "failed");
+    setWithdrawModal(false);
+    setConfirmModal(true);
+  };
+
   return (
-    <HeaderWrapper>
-      <MainHeaderWrapper>
-        <MainHeaderContainer>
-          <HeaderLogo />
-          <HeaderMenuWrapper>
-            {headerData.map((item, key) => (
-              <HeaderNavItem
-                key={key}
-                to={item.to}
-                active={currentPath?.to === item.to ? "true" : undefined}
-              >
-                {item.label}
-              </HeaderNavItem>
-            ))}
-          </HeaderMenuWrapper>
-          <HeaderButtonGroup>
-            <HeaderButton width={124}>
-              <IconCoins />
-              <span>$1,325.00</span>
-            </HeaderButton>
-            <HeaderButton width={124}>
-              <IconProfile />
-              <span>Username</span>
-            </HeaderButton>
-            <NotificationButtonWrapper>
+    <>
+      <HeaderWrapper>
+        <MainHeaderWrapper>
+          <MainHeaderContainer>
+            <HeaderLogo />
+            <HeaderMenuWrapper>
+              {headerData
+                .filter((f) => f.label !== "")
+                .map((item, key) => (
+                  <HeaderNavItem
+                    key={key}
+                    to={item.to}
+                    active={currentPath?.to === item.to ? "true" : undefined}
+                  >
+                    {item.label}
+                  </HeaderNavItem>
+                ))}
+            </HeaderMenuWrapper>
+            {currentUser ? (
+              <HeaderButtonGroup>
+                <HeaderButton width={124} onClick={handleWithdrawClick}>
+                  <IconCoins />
+                  <span>$1,325.00</span>
+                </HeaderButton>
+                <HeaderButton
+                  width={124}
+                  className={currentPath?.to === "/profile" ? "active" : ""}
+                  onClick={() => navigate("/profile/")}
+                >
+                  <IconProfile />
+                  <span>Username</span>
+                </HeaderButton>
+                <NotificationButtonWrapper>
+                  <HeaderButton onClick={() => setNotification(true)}>
+                    <IconAlarm />
+                    <Badge>5</Badge>
+                  </HeaderButton>
+                  <Notification
+                    open={notification}
+                    onClose={() => setNotification(false)}
+                  />
+                </NotificationButtonWrapper>
+              </HeaderButtonGroup>
+            ) : (
+              <HeaderButtonGroup>
+                <Button
+                  className="login-button"
+                  onClick={() => navigate("/signin")}
+                >
+                  <IconLogout />
+                  <span>Log In</span>
+                </Button>
+              </HeaderButtonGroup>
+            )}
+            <MobileMenuButton>
               <HeaderButton>
-                <IconAlarm />
-                <Badge>5</Badge>
+                <IconMenu />
               </HeaderButton>
-              {/* <Notification /> */}
-            </NotificationButtonWrapper>
-          </HeaderButtonGroup>
-          <MobileMenuButton>
-            <HeaderButton>
-              <IconMenu />
-            </HeaderButton>
-          </MobileMenuButton>
-        </MainHeaderContainer>
-      </MainHeaderWrapper>
-      {currentPath?.children && (
-        <SubHeaderWrapper>
-          <SubHeaderContainer id="submenu">
-            {currentPath?.children.map((item, key) => (
-              <SubMenuItem
-                key={key}
-                to={currentPath.to + "/" + item.to}
-                active={
-                  location.pathname.split("/")[2] === item.to
-                    ? "true"
-                    : undefined
-                }
-              >
-                {item.label}
-              </SubMenuItem>
-            ))}
-          </SubHeaderContainer>
-        </SubHeaderWrapper>
-      )}
-    </HeaderWrapper>
+            </MobileMenuButton>
+          </MainHeaderContainer>
+        </MainHeaderWrapper>
+        {currentPath?.children && (
+          <SubHeaderWrapper>
+            <SubHeaderContainer id="submenu">
+              {currentPath?.children.map((item, key) => (
+                <SubMenuItem
+                  key={key}
+                  to={currentPath.to + "/" + item.to}
+                  active={
+                    location.pathname.split("/")[2] === item.to
+                      ? "true"
+                      : undefined
+                  }
+                >
+                  {item.label}
+                </SubMenuItem>
+              ))}
+            </SubHeaderContainer>
+          </SubHeaderWrapper>
+        )}
+      </HeaderWrapper>
+      <BalanceForWithdrawModal
+        onClose={() => setBalanceModal(false)}
+        open={balanceModal}
+        onWithdraw={handleWithdraw}
+      />
+      <WithdrawModal
+        onClose={() => setWithdrawModal(false)}
+        open={withdrawModal}
+        onWithdraw={handleConfirmWithdraw}
+      />
+      <WithdrawConfirmModal
+        status={withdrawStatus}
+        onClose={() => setConfirmModal(false)}
+        open={confirmModal}
+      />
+    </>
   );
 };

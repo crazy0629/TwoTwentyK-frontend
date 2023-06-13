@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppLayout } from "../../../layout/AppLayout";
 import {
   ButtonGroup,
@@ -15,9 +15,16 @@ import {
   ViewDateCardSection,
 } from "../../../modules";
 import { triggerCardData } from "./data";
+import { useNavigate } from "react-router-dom";
 
 export const TriggersPage: React.FC = () => {
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState<string | null>("");
   const [isView, setIsView] = useState<"view" | "sell" | "">("");
+
+  useEffect(() => {
+    setCurrentUser(localStorage.getItem("auth"));
+  }, []);
 
   const [modal, setModal] = useState(false);
   const handleSellConfirm = () => {
@@ -38,45 +45,54 @@ export const TriggersPage: React.FC = () => {
   return (
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
-      {triggerCardData.length > 0 ? (
-        <DatesPageWrapper isview={isView ? "true" : undefined}>
-          <DatePageContainer>
-            <DatePageTitleWrapper>
-              <h3>Triggers</h3>
-              <ButtonGroup>
-                <Button className="buy-button">Buy Cards</Button>
-                <Button className="buy-button">Buy Packs</Button>
-              </ButtonGroup>
-            </DatePageTitleWrapper>
-            <FilterSection />
-            <CardGridSection
-              data={triggerCardData}
-              cardType={"trigger"}
-              onCraft={handleCraft}
-              onSell={handleSell}
-              onView={handleView}
-            />
-            <ViewDateCardSection
-              isView={isView === "view"}
-              cardType="trigger"
-              id={"asdfa"}
-              onClose={() => setIsView("")}
-            />
-            <SellDateCardSection
-              onSellConfirm={handleSellConfirm}
-              isView={isView === "sell"}
-              cardType="trigger"
-              id={"asdfa"}
-              onClose={() => setIsView("")}
-            />
-          </DatePageContainer>
-        </DatesPageWrapper>
+      {currentUser ? (
+        triggerCardData.length > 0 ? (
+          <DatesPageWrapper isview={isView ? "true" : undefined}>
+            <DatePageContainer>
+              <DatePageTitleWrapper>
+                <h3>Triggers</h3>
+                <ButtonGroup>
+                  <Button className="buy-button">Buy Cards</Button>
+                  <Button className="buy-button">Buy Packs</Button>
+                </ButtonGroup>
+              </DatePageTitleWrapper>
+              <FilterSection />
+              <CardGridSection
+                data={triggerCardData}
+                cardType={"trigger"}
+                onCraft={handleCraft}
+                onSell={handleSell}
+                onView={handleView}
+              />
+              <ViewDateCardSection
+                isView={isView === "view"}
+                cardType="trigger"
+                id={"asdfa"}
+                onClose={() => setIsView("")}
+              />
+              <SellDateCardSection
+                onSellConfirm={handleSellConfirm}
+                isView={isView === "sell"}
+                cardType="trigger"
+                id={"asdfa"}
+                onClose={() => setIsView("")}
+              />
+            </DatePageContainer>
+          </DatesPageWrapper>
+        ) : (
+          <EmptyCards>
+            <h3>No Triggers</h3>
+            <p>It looks like you don’t have any triggers yet.   </p>
+            <Button className="buy-button">Buy Cards</Button>
+            <Button className="buy-button">Buy Packs</Button>
+          </EmptyCards>
+        )
       ) : (
-        <EmptyCards>
-          <h3>No Triggers</h3>
-          <p>It looks like you don’t have any triggers yet.   </p>
-          <Button className="buy-button">Buy Cards</Button>
-          <Button className="buy-button">Buy Packs</Button>
+        <EmptyCards className="login">
+          <p>Explanatory text. Log in to start playing.</p>
+          <Button className="buy-button" onClick={() => navigate("/signin")}>
+            Login Now
+          </Button>
         </EmptyCards>
       )}
     </AppLayout>

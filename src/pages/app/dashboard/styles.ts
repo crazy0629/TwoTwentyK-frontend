@@ -8,6 +8,12 @@ export const DashboardPageWrapper = styled.div`
   & > div {
     margin-top: 28px;
   }
+  .login-button {
+    width: 255px;
+    height: 51px;
+    margin: auto;
+    margin-top: 61px;
+  }
 `;
 
 export const DashboardCardWrapper = styled.div`

@@ -22,7 +22,7 @@ export const Modal: React.FC<ModalProps> = ({
   }, [open]);
 
   return (
-    <ModalWrapper open={open ? "true" : undefined}>
+    <ModalWrapper open={open}>
       <ModalContainer width={width}>
         <CloseButton onClick={onClose}>&times;</CloseButton>
         {children}

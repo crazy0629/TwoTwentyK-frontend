@@ -7,9 +7,11 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   disabled,
   className,
+  variant,
 }) => {
   return (
     <ButtonWrapper
+      variant={variant}
       onClick={disabled ? () => {} : onClick}
       disabled={disabled}
       className={className}

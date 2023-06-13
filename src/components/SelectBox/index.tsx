@@ -16,9 +16,12 @@ import { Button } from "../Button";
 
 export const SelectBox: React.FC<SelectBoxProps> = ({
   placeholder,
+  label,
   value,
   options,
+  border,
   isFilter,
+  onChange,
 }) => {
   const optionRef = useRef<any>(null);
   const [isOption, setIsOption] = useState(false);
@@ -36,6 +39,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
   }, []);
 
   const handleOptionClick = (value: string) => {
+    onChange && onChange(value);
     setIsOption(false);
   };
 
@@ -45,9 +49,25 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
 
   return (
     <SelectBoxWrapper ref={optionRef}>
-      <SelectBoxContainer onClick={() => setIsOption((prev) => !prev)}>
+      {label && <p>{label}</p>}
+      <SelectBoxContainer
+        border={border ? "true" : undefined}
+        onClick={() => setIsOption((prev) => !prev)}
+      >
         <SelectBoxTextWrapper>
-          {value ? value : <span>{placeholder}</span>}
+          {value ? (
+            <>
+              {options.filter((f) => f.value === value)[0].image && (
+                <img
+                  src={options.filter((f) => f.value === value)[0].image}
+                  alt=""
+                />
+              )}{" "}
+              {options.filter((f) => f.value === value)[0].label}
+            </>
+          ) : (
+            <span>{placeholder}</span>
+          )}
         </SelectBoxTextWrapper>
         <IconArrowDown />
       </SelectBoxContainer>
@@ -82,7 +102,10 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
                 key={key}
                 onClick={() => handleOptionClick(item.value)}
               >
-                {item.label}
+                <div>
+                  {item.image ? <img src={item.image} alt="" /> : ""}
+                  {item.label}
+                </div>
               </OptionItem>
             ))}
           </OptionGroup>

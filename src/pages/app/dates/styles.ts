@@ -79,4 +79,9 @@ export const EmptyCards = styled.div`
     width: 203px;
     margin-top: 20px;
   }
+  &.login {
+    p {
+      max-width: 233px;
+    }
+  }
 `;

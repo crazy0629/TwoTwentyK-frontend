@@ -1,28 +1,30 @@
-import React from "react";
-import { NotificationWrapper, NotificationsGroup } from "./styles";
+import React, { useEffect, useRef } from "react";
+import { CloseButton, NotificationWrapper, NotificationsGroup } from "./styles";
 import { notifications } from "./data";
 import { NotificationItem } from "../../components/NotificationItem";
+import { NotificationProps } from "../../types";
 
-export const Notification: React.FC = () => {
-  // const wrapperRef = useRef(null);
-  // useEffect(() => {
-  //     /**
-  //      * Alert if clicked on outside of element
-  //      */
-  //     const handleClickOutside = (event) => {
-  //       if (ref.current && !ref.current.contains(event.target)) {
-  //         alert("You clicked outside of me!");
-  //       }
-  //     }
-  //     // Bind the event listener
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //     return () => {
-  //       // Unbind the event listener on clean up
-  //       document.removeEventListener("mousedown", handleClickOutside);
-  //     };
-  //   }, [ref]);
+export const Notification: React.FC<NotificationProps> = ({
+  onClose,
+  open,
+}) => {
+  const wrapperRef = useRef<any>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
-    <NotificationWrapper>
+    <NotificationWrapper ref={wrapperRef} open={open}>
+      <CloseButton onClick={onClose}>&times;</CloseButton>
       <h3>Notifications</h3>
       <NotificationsGroup>
         {notifications.map((item, key) => (

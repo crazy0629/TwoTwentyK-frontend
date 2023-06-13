@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormWrapper, InputWrapper } from "./styles";
+import { FormWrapper, InputDescWrapper, InputWrapper } from "./styles";
 import { InputProps } from "../../types";
 import { IconEye } from "../Icons";
 
@@ -11,13 +11,15 @@ export const Input: React.FC<InputProps> = ({
   value,
   id,
   name,
+  desc,
   error,
+  code,
 }) => {
   const [inputType, setInputType] = useState(type);
   return (
     <FormWrapper>
       {label && <p>{label}</p>}
-      <InputWrapper iserror={error} suffix={type}>
+      <InputWrapper iserror={error} suffix={code ? "code" : type}>
         <input
           type={inputType}
           name={name}
@@ -35,8 +37,10 @@ export const Input: React.FC<InputProps> = ({
             <IconEye />
           </div>
         )}
+        {code && <div className="code">{code}</div>}
       </InputWrapper>
       {error && <span>{error}</span>}
+      {desc && <InputDescWrapper>{desc}</InputDescWrapper>}
     </FormWrapper>
   );
 };

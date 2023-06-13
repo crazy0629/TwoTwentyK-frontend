@@ -101,7 +101,7 @@ export const ViewDateCardContainer = styled.div`
 `;
 
 export const PropertiesWrapper = styled.div`
-  margin-top: 32px;
+  margin-top: 16px;
   width: 100%;
 `;
 

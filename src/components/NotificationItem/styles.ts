@@ -39,6 +39,9 @@ export const NotificationTitleWrapper = styled.div`
     justify-content: center;
     background: #17d190;
     border-radius: 4px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 12px;
     color: #fff;
   }
 `;

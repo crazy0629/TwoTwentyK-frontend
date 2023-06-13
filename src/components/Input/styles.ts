@@ -17,6 +17,14 @@ export const FormWrapper = styled.div`
   }
 `;
 
+export const InputDescWrapper = styled.div`
+  margin-top: 14px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: rgba(12, 9, 42, 0.5);
+`;
+
 export const InputWrapper = styled.div<{ iserror?: string; suffix?: string }>`
   border: 1px solid ${({ iserror }) => (iserror ? "#ff0000" : "#E4E4E4")};
   border-radius: 4px;
@@ -30,7 +38,8 @@ export const InputWrapper = styled.div<{ iserror?: string; suffix?: string }>`
     width: 100%;
     outline: none;
     padding: 0 16px;
-    padding-right: ${({ suffix }) => (suffix === "password" ? "40px" : "16px")};
+    padding-right: ${({ suffix }) =>
+      suffix === "code" ? "95px" : suffix === "password" ? "40px" : "16px"};
     border: none;
     border-radius: 4px;
     font-weight: 400;
@@ -44,5 +53,13 @@ export const InputWrapper = styled.div<{ iserror?: string; suffix?: string }>`
     width: fit-content;
     cursor: pointer;
     right: 10px;
+    &.code {
+      width: 80px;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 150%;
+      color: #0c092a;
+      opacity: 0.2;
+    }
   }
 `;
