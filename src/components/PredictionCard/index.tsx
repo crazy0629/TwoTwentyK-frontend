@@ -29,6 +29,7 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({
   onCraft,
   onSell,
   onView,
+  onBuy,
 }) => {
   return (
     <PredictionCardWrapper
@@ -38,8 +39,8 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({
     >
       <CardTopWrapper>
         <CardDateWrapper>
-          <div className="date">{date}</div>
-          <div className="year">{year}</div>
+          {date && <div className="date">{date}</div>}
+          {year && <div className="year">{year}</div>}
         </CardDateWrapper>
         <CardTypeWrapper>{type}</CardTypeWrapper>
       </CardTopWrapper>
@@ -49,15 +50,20 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({
           <p>{iconText}</p>
         </CardBodyWrapper>
       )}
-      <CardBottomWrapper>
-        {amount && <AmountWrapper>{amount}</AmountWrapper>}
-        {name}
-      </CardBottomWrapper>
+      {name && (
+        <CardBottomWrapper>
+          {amount && <AmountWrapper>{amount}</AmountWrapper>}
+          {name}
+        </CardBottomWrapper>
+      )}
       <CardOverlayWrapper className="overlay">
         <CardButtonGroup>
-          <CardButton onClick={onView}>View</CardButton>
-          <CardButton onClick={onCraft}>Craft Prediction</CardButton>
-          <CardButton onClick={onSell}>Sell</CardButton>
+          {onView && <CardButton onClick={onView}>View</CardButton>}
+          {onCraft && (
+            <CardButton onClick={onCraft}>Craft Prediction</CardButton>
+          )}
+          {onSell && <CardButton onClick={onSell}>Sell</CardButton>}
+          {onBuy && <CardButton onClick={onBuy}>Buy</CardButton>}
         </CardButtonGroup>
       </CardOverlayWrapper>
     </PredictionCardWrapper>

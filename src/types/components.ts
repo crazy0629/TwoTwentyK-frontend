@@ -37,8 +37,8 @@ export type AppHeaderMenuItemProps = {
 };
 
 export type PredictionCardProps = {
-  date: string;
-  year: string | number;
+  date?: string;
+  year?: string | number;
   type: string;
   amount?: string | number;
   image?: string;
@@ -50,6 +50,7 @@ export type PredictionCardProps = {
   onView?: () => void;
   onCraft?: () => void;
   onSell?: () => void;
+  onBuy?: () => void;
 };
 
 export type FeedItemProps = {
@@ -194,7 +195,7 @@ export type NotificationProps = {
 export type MarketCardProps = {
   image: string;
   name: string;
-  type: string;
+  type?: string;
   rarity: string;
   status?: string;
   owned?: string | number;

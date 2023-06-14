@@ -13,13 +13,16 @@ import {
 import {
   Button,
   IconArrowDown,
+  IconCardAthlete,
   Input,
   MarketCard,
+  PredictionCard,
   SellConfirmModal,
 } from "../../components";
 
 export const MSellCardSection: React.FC<CardSidebarProps> = ({
   open,
+  page,
   onClose,
 }) => {
   const [modal, setModal] = useState(false);
@@ -38,12 +41,40 @@ export const MSellCardSection: React.FC<CardSidebarProps> = ({
           <CloseButton onClick={onClose}>&times;</CloseButton>
           <h2>Sell Date Card</h2>
           <ViewCardWrapper>
-            <MarketCard
-              image="/assets/nfts/1.png"
-              name=""
-              rarity="Rare"
-              type=""
-            />
+            {!page && (
+              <MarketCard
+                image="/assets/nfts/1.png"
+                name=""
+                rarity="Rare"
+                type=""
+              />
+            )}
+            {page === "packs" && (
+              <MarketCard
+                image="/assets/buy.png"
+                name=""
+                rarity="Rare"
+                type=""
+              />
+            )}
+            {page === "identities" && (
+              <PredictionCard
+                icon={<IconCardAthlete />}
+                iconText="Athlete"
+                name=""
+                type="Rare"
+                height={298}
+              />
+            )}
+            {page === "predictions" && (
+              <PredictionCard
+                image="/assets/nfts/2.png"
+                name="Tom Brady"
+                type="Rare"
+                height={298}
+                amount={3}
+              />
+            )}
           </ViewCardWrapper>
           <PropertiesWrapper>
             <PropertiesHeader>

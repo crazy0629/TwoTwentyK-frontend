@@ -10,9 +10,11 @@ export const FilterSectionWrapper = styled.div`
 `;
 
 export const FilterSectionGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 42px;
+  display: flex;
+  justify-content: space-between;
+  & > :not(:first-child) {
+    margin-left: 20px;
+  }
 `;
 
 export const CardGridWrapper = styled.div`

@@ -46,6 +46,12 @@ export const MarketCard: React.FC<MarketCardProps> = ({
               Make an Offer
             </CardButton>
           )}
+          {!type && status === "For Sale" && (
+            <CardButton onClick={() => onCard(1, "sell")}>Sell</CardButton>
+          )}
+          {!type && !status && (
+            <CardButton onClick={() => onCard(1, "buy")}>Buy</CardButton>
+          )}
         </CardOverlay>
       )}
     </CardWrapper>
