@@ -82,7 +82,6 @@ export const BuyPackConfirmModalWrapper = styled.div`
     font-weight: 600;
     font-size: 24px;
     line-height: 129.02%;
-    margin-bottom: 34px;
   }
   p {
     font-weight: 500;
@@ -91,6 +90,7 @@ export const BuyPackConfirmModalWrapper = styled.div`
     max-width: 228px;
     margin: auto;
     width: 100%;
+    margin-top: 34px;
     margin-bottom: 34px;
   }
 `;

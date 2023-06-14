@@ -8,6 +8,8 @@ import { Button } from "../Button";
 export const SellConfirmModal: React.FC<SellModalProps> = ({
   open,
   onClose,
+  isMarket,
+  isOffer,
 }) => {
   return (
     <ModalWrapper open={open} onClose={onClose} width={365}>
@@ -15,10 +17,14 @@ export const SellConfirmModal: React.FC<SellModalProps> = ({
         <IconWrapper>
           <IconConfirm />
         </IconWrapper>
-        <p>Congratulations! Your card is now listed for sale</p>
+        <p>
+          {isOffer
+            ? "Success! How will you know if accepted or denied message"
+            : "Congratulations! Your card is now listed for sale"}
+        </p>
         <ButtonGroup>
           <Button onClick={onClose}>Done</Button>
-          <Button onClick={() => {}}>View In Marketplace</Button>
+          {!isMarket && <Button onClick={() => {}}>View In Marketplace</Button>}
         </ButtonGroup>
       </SellConfirmModalWrapper>
     </ModalWrapper>

@@ -7,6 +7,7 @@ export * from "./FeedItem";
 export * from "./HeaderLogo";
 export * from "./Icons";
 export * from "./Input";
+export * from "./MarketCard";
 export * from "./Modals";
 export * from "./NotificationItem";
 export * from "./Notify";

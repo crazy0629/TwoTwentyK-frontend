@@ -39,8 +39,9 @@ export const SortButton = styled.div`
   align-items: center;
   justify-content: center;
   /* width: 51px; */
-  min-width: 51px;
-  height: 51px;
+  max-width: 40px;
+  width: 100%;
+  height: 40px;
   background: #e2e4ec;
   box-shadow: 1px 1.5px 3px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
@@ -176,9 +177,11 @@ export const SetPriceWrapper = styled.div`
   width: 100%;
   padding: 20px 0;
   & > * {
-    margin-bottom: 18px;
     position: relative;
     z-index: 1;
+  }
+  & > :not(:last-child) {
+    margin-bottom: 18px;
   }
   & > p {
     font-weight: 400;
@@ -195,5 +198,24 @@ export const SetPriceWrapper = styled.div`
     left: -52px;
     right: -52px;
     background: #f9faff;
+  }
+  h5 {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+    color: #878686;
+    margin: 0;
+    width: 100%;
+  }
+  h4 {
+    width: 100%;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 4px 0 0;
+    line-height: 24px;
+  }
+  .sell-confirm-button {
+    margin: 13px 0 0;
   }
 `;

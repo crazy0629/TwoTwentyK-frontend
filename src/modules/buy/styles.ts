@@ -234,6 +234,7 @@ export const SummaryWrapper = styled.div`
 export const SummaryContent = styled.div`
   display: flex;
   align-items: center;
+  mix-blend-mode: luminosity;
   img {
     min-width: 117px;
     height: 117px;

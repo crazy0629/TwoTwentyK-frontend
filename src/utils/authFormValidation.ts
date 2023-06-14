@@ -12,6 +12,11 @@ type UsernameFormProps = {
   username: string;
 };
 
+type ResetPassFormProps = {
+  password: string;
+  rPassword: string;
+};
+
 const validateEmail = (email: string) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
@@ -127,6 +132,34 @@ export const usernameFormValidation = (
     errors: {
       username: usernameError,
       email: isEmail ? emailError : "",
+    },
+  };
+};
+
+export const resetPassFormValidation = ({
+  password,
+  rPassword,
+}: ResetPassFormProps) => {
+  let passwordError = "",
+    rPassError = "";
+  if (password === "") {
+    passwordError = "Password field is required.";
+  } else if (!validatePassword(password)) {
+    passwordError =
+      "Must contain at least 1 upper case, numeric, and special character.";
+  }
+
+  if (rPassword === "") {
+    rPassError = "Confirm Password field is required.";
+  } else if (password !== rPassword) {
+    rPassError = "Confirm password does not match new password.";
+  }
+
+  return {
+    isValid: passwordError === "" && rPassError === "",
+    errors: {
+      password: passwordError,
+      rPassword: rPassError,
     },
   };
 };

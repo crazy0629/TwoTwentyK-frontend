@@ -21,6 +21,7 @@ export const Notification: React.FC<NotificationProps> = ({
       // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <NotificationWrapper ref={wrapperRef} open={open}>
