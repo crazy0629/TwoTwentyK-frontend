@@ -3,7 +3,7 @@ export const headerData = [
     label: "My hub",
     to: "/dashboard",
     children: [
-      { label: "Dashboard", to: "" },
+      { label: "Dashboard", to: "home" },
       { label: "Dates", to: "dates" },
       { label: "Categories", to: "categories" },
       { label: "Identities", to: "identities" },
@@ -15,6 +15,10 @@ export const headerData = [
   {
     label: "Crafting",
     to: "/crafting",
+    children: [
+      { label: "Identities", to: "identities" },
+      { label: "Predictions", to: "predictions" },
+    ],
   },
   {
     label: "Buy packs",

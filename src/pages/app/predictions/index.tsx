@@ -36,7 +36,9 @@ export const PredictionsPage: React.FC = () => {
     setIsView("view");
   };
 
-  const handleCraft = (id: string | number) => {};
+  const handleCraft = (id: string | number) => {
+    navigate("/crafting/predictions");
+  };
 
   const handleSell = (id: string | number) => {
     setIsView("sell");

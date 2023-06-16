@@ -5,9 +5,11 @@ import { useLocation } from "react-router-dom";
 import { headerData } from "./data";
 import { Footer } from "../AuthLayout/Footer";
 
-export const AppLayout: React.FC<React.HTMLAttributes<HTMLElement>> = ({
-  children,
-}) => {
+type AppLayoutProps = {
+  noFooter?: boolean;
+} & React.HTMLAttributes<HTMLElement>;
+
+export const AppLayout: React.FC<AppLayoutProps> = ({ children, noFooter }) => {
   const location = useLocation();
   const [isSubmenu, setIsSubmenu] = useState(false);
 
@@ -25,7 +27,7 @@ export const AppLayout: React.FC<React.HTMLAttributes<HTMLElement>> = ({
       <AppContainer issubmenu={isSubmenu ? "true" : undefined}>
         {children}
       </AppContainer>
-      <Footer />
+      {!noFooter && <Footer />}
     </AppLayoutWrapper>
   );
 };

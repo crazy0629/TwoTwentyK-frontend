@@ -36,7 +36,9 @@ export const IdentitiesPage: React.FC = () => {
     setIsView("view");
   };
 
-  const handleCraft = (id: string | number) => {};
+  const handleCraft = (id: string | number) => {
+    navigate("/crafting/identities");
+  };
 
   const handleSell = (id: string | number) => {
     setIsView("sell");

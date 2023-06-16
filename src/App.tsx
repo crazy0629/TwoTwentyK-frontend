@@ -27,6 +27,8 @@ import {
   MarketplaceIdentitiesPage,
   MarketplacePredictionPage,
   MarketplacePacksPage,
+  CraftingIdentitesPage,
+  CraftingPredictionsPage,
 } from "./pages";
 
 const App: React.FC = () => {
@@ -42,8 +44,12 @@ const App: React.FC = () => {
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/signup/username" element={<UsernamePage />} />
           {/* Dashboard Routes */}
-          <Route path="/" element={<Navigate to={"/dashboard"} />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/" element={<Navigate to={"/dashboard/home"} />} />
+          <Route
+            path="/dashboard"
+            element={<Navigate to={"/dashboard/home"} />}
+          />
+          <Route path="/dashboard/home" element={<DashboardPage />} />
           <Route path="/dashboard/dates" element={<DatesPage />} />
           <Route path="/dashboard/categories" element={<CommingSoonPage />} />
           <Route path="/dashboard/identities" element={<IdentitiesPage />} />
@@ -51,6 +57,20 @@ const App: React.FC = () => {
           <Route path="/dashboard/predictions" element={<PredictionsPage />} />
           <Route path="/dashboard/packs" element={<CommingSoonPage />} />
           {/* Dashboard Routes */}
+          {/* Crafting Routes */}
+          <Route
+            path="/crafting"
+            element={<Navigate to={"/crafting/identities"} />}
+          />
+          <Route
+            path="/crafting/identities"
+            element={<CraftingIdentitesPage />}
+          />
+          <Route
+            path="/crafting/predictions"
+            element={<CraftingPredictionsPage />}
+          />
+          {/* Crafting Routes */}
           {/* Marketplace Routes */}
           <Route path="/marketplace" element={<MarketplacePage />} />
           <Route
@@ -63,7 +83,6 @@ const App: React.FC = () => {
           />
           <Route path="/marketplace/packs" element={<MarketplacePacksPage />} />
           {/* Marketplace Routes */}
-          <Route path="/crafting" element={<CommingSoonPage />} />
           <Route path="/buy" element={<BuyPackPage />} />
           <Route path="/learn" element={<CommingSoonPage />} />
           {/* Profile Routes */}

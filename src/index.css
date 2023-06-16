@@ -30,3 +30,15 @@ h6,
 p {
   margin: 0;
 }
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(202, 203, 207, 0.25);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00000016;
+}
