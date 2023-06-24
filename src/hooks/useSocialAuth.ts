@@ -3,19 +3,22 @@ import { useNavigate } from "react-router-dom";
 export const useSocialAuth = () => {
   const navigate = useNavigate();
 
-  const onGoogleAuthClicked = (authType: string) => {
+  const onGoogleAuthClicked = (res: any, authType: string) => {
+    console.log(res);
     if (authType === "Signup") {
       navigate("/signup/username?email=moulee@example.com");
     }
   };
 
-  const onFacebookAuthClicked = (authType: string) => {
+  const onFacebookAuthClicked = (res: any, authType: string) => {
+    console.log(res);
     if (authType === "Signup") {
       navigate("/signup/username");
     }
   };
 
-  const onAppleAuthClicked = (authType: string) => {
+  const onAppleAuthClicked = (res: any, authType: string) => {
+    console.log(res);
     if (authType === "Signup") {
       navigate("/signup/username");
     }

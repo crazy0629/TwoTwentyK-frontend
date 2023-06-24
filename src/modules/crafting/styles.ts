@@ -91,6 +91,9 @@ export const SelectCardSectionContainer = styled.div`
     font-size: 18px;
     line-height: 22px;
     margin-bottom: 15px;
+    span {
+      text-transform: capitalize;
+    }
   }
   padding: 32px 0;
   max-width: 825px;
@@ -121,9 +124,9 @@ export const CraftingCardWrapper = styled.div<{ active?: string }>`
   background: ${({ active }) => (active ? "#dbdee8" : "transparent")};
   box-shadow: ${({ active }) =>
     active ? "0px 0px 14.9405px rgba(0, 0, 0, 0.05)" : "none"};
-  .select-button {
+  /* .select-button {
     opacity: ${({ active }) => (active ? 1 : 0.15)};
-  }
+  } */
 `;
 
 export const CraftCard = styled.div<{ bg: string }>`
@@ -141,6 +144,13 @@ export const CraftCard = styled.div<{ bg: string }>`
     height: 278px;
     margin: auto;
     margin-bottom: 28px;
+  }
+  &.crafting-card {
+    width: 100%;
+    height: 178px;
+    border: 1.61734px solid rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.17);
+    border-radius: 5px;
   }
   img {
     width: 100%;
@@ -171,6 +181,7 @@ export const CraftCard = styled.div<{ bg: string }>`
     background: #d2d4dd;
     font-weight: 400;
     font-size: 11.9981px;
+    text-transform: capitalize;
     height: 35px;
     display: flex;
     align-items: center;
@@ -180,7 +191,7 @@ export const CraftCard = styled.div<{ bg: string }>`
   }
 `;
 
-export const SelectButton = styled.div`
+export const SelectButton = styled.div<{ disabled?: string }>`
   width: 100%;
   background-color: #000;
   border-radius: 40px;
@@ -190,13 +201,25 @@ export const SelectButton = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 12px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  opacity: ${({ disabled }) => (disabled ? 0.15 : 1)};
 `;
 
 export const CardPreviewSectionWrapper = styled.div`
   padding: 38px 46px;
   flex: 1;
   overflow-y: auto;
+  & > p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    opacity: 0.5;
+    text-align: center;
+    max-width: 242px;
+    width: 100%;
+    margin: auto;
+    margin-top: 50px;
+  }
   & > h2 {
     font-weight: 500;
     font-size: 22px;
@@ -218,13 +241,21 @@ export const MatchListSectionWrapper = styled.div`
     text-align: center;
   }
   & > p {
+    margin-top: 4px;
+    margin-bottom: 26px;
+    padding: 0 46px;
+    text-align: center;
+  }
+  & > .empty-matched {
+    opacity: 0.5;
     text-align: center;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    margin-top: 4px;
-    margin-bottom: 26px;
-    padding: 0 46px;
+    margin: auto;
+    /* margin-top: 50px; */
+    max-width: 242px;
+    padding: 0;
   }
 `;
 

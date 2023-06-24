@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   CardGridWrapper,
   CraftCard,
@@ -15,19 +15,25 @@ import { SortButton } from "../app/dates/styles";
 
 export const SelectCardSection: React.FC<{
   page: "identity" | "prediction";
-}> = ({ page }) => {
-  const [clickedCard, setClickedCard] = useState<number>(-1);
-
-  const handleCardClick = (id: number) => {
-    setClickedCard(id);
-  };
-
-  const handleSelectClick = (id: number) => {};
-
+  selectedCraft: string;
+  clickedCard: number | string | null;
+  selectedCard: number | string | null;
+  onCardClicked: (key: number | string) => void;
+  onCardSelected: (key: number | string, craft: string) => void;
+}> = ({
+  page,
+  selectedCraft,
+  clickedCard,
+  selectedCard,
+  onCardClicked,
+  onCardSelected,
+}) => {
   return (
     <SelectCardSectionWrapper>
       <SelectCardSectionContainer>
-        <h2>Select a Crafting Card</h2>
+        <h2>
+          Select a <span>{selectedCraft}</span> Card
+        </h2>
         <FilterWrapper>
           <SelectBoxWrapper>
             <SelectBox
@@ -49,13 +55,22 @@ export const SelectCardSection: React.FC<{
               key={key}
               active={clickedCard === key ? "true" : undefined}
             >
-              <CraftCard onClick={() => handleCardClick(key)} bg={item.image}>
+              <CraftCard onClick={() => onCardClicked(key)} bg={item.image}>
                 <span>{item.rarities}</span>
-                <p>Crafting</p>
+                <p>{selectedCraft}</p>
               </CraftCard>
               <SelectButton
                 className="select-button"
-                onClick={() => handleSelectClick(key)}
+                disabled={
+                  clickedCard !== key || selectedCard === key
+                    ? "true"
+                    : undefined
+                }
+                onClick={
+                  clickedCard !== key || selectedCard === key
+                    ? () => {}
+                    : () => onCardSelected(key, selectedCraft)
+                }
               >
                 Select
               </SelectButton>

@@ -14,6 +14,8 @@ import {
   SocialButtonsGroup,
 } from "../../components";
 import { signupFormValidation } from "../../utils";
+import { register } from "../../actions";
+import { ToastContainer, toast } from "react-toastify";
 
 export const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
@@ -21,24 +23,15 @@ export const SignUpForm: React.FC = () => {
   const [error, setError] = useState({ username: "", email: "", password: "" });
   const [isAgree, setIsAgree] = useState(true);
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     const { isValid, errors } = signupFormValidation(form);
     setError(errors);
     if (isValid) {
-      if (form.username === "moulee") {
-        setError((prev) => ({
-          ...prev,
-          username: "Already in use, try a different username.",
-        }));
-      }
-      if (form.email === "moulee@example.com") {
-        setError((prev) => ({
-          ...prev,
-          email: "Already in use, try a different email.",
-        }));
-      }
-      if (form.email !== "moulee@example.com" && form.username !== "moulee") {
+      const res = await register({ ...form });
+      if (res.success) {
         navigate("/check-email?type=signup");
+      } else {
+        toast.error(res.message);
       }
     }
   };
@@ -49,7 +42,19 @@ export const SignUpForm: React.FC = () => {
 
   return (
     <AuthFormWrapper>
-      <AuthFormTitle>Sign Up</AuthFormTitle>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      ;<AuthFormTitle>Sign Up</AuthFormTitle>
       <SocialButtonsGroup authType="Signup" />
       <AuthFormGroup>
         <Input
