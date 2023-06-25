@@ -8,7 +8,7 @@ export const CommingSoonPage: React.FC = () => {
   return (
     <NotFoundWrapper>
       <HeaderLogo />
-      <h1>Comming Soon!</h1>
+      <h1>Coming Soon!</h1>
       <Button className="not-found-button" onClick={() => navigate("/")}>
         Back to Home
       </Button>
