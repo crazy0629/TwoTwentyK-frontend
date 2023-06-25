@@ -13,19 +13,32 @@ import {
 } from "../../../modules";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../components";
+import { ToastContainer, toast } from "react-toastify";
+import { craftingPrediction } from "../../../actions";
 
 export const CraftingPredictionsPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [selectedCraft, setSelectedCraft] = useState("crafting");
-  const [clickedCard, setClickedCard] = useState<number | string | null>(null);
+  const [clickedCard, setClickedCard] = useState<number | string | null>(-1);
   const [selectedCard, setSelectedCard] = useState<number | string | null>(-1);
   const [selectedCards, setSelectedCards] = useState<{
     crafting: number | string | null;
     year: number | string | null;
-    dayMonth: number | string | null;
+    day: number | string | null;
+    month: number | string | null;
     category: number | string | null;
-  }>({ crafting: -1, category: -1, dayMonth: -1, year: -1 });
+    identity: number | string | null;
+    trigger: number | string | null;
+  }>({
+    crafting: -1,
+    category: -1,
+    day: -1,
+    month: -1,
+    year: -1,
+    identity: -1,
+    trigger: -1,
+  });
 
   useEffect(() => {
     setCurrentUser(localStorage.getItem("auth"));
@@ -43,14 +56,43 @@ export const CraftingPredictionsPage: React.FC = () => {
     setSelectedCards((prev) => ({ ...prev, [craft]: id }));
     setSelectedCard(id);
   };
+  const handleCraft = (page: "identity" | "prediction") => {
+    page === "prediction" && craftPrediction();
+  };
+
+  const craftPrediction = async () => {
+    const newCraft = {
+      nft_identity_id: Number(selectedCards.identity),
+      nft_trigger_id: Number(selectedCards.trigger),
+    };
+    const res = await craftingPrediction(newCraft);
+    if (res.success) {
+      toast.success("Crafted Successfully.");
+    } else {
+      toast.error(res.message);
+    }
+  };
 
   return (
     <AppLayout noFooter>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <CraftingWrapper>
         {currentUser ? (
           <>
             <CraftLeftWrapper>
               <CraftSection
+                onCraft={handleCraft}
                 page="prediction"
                 onCraftChanged={setSelectedCraft}
                 selectedCards={selectedCards}

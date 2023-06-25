@@ -16,9 +16,12 @@ import {
 } from "../../../modules";
 import { dateCardData } from "./data";
 import { useNavigate } from "react-router-dom";
+import { useMarketplaceListContext } from "../../../context";
 
 export const DatesPage: React.FC = () => {
   const navigate = useNavigate();
+  const { marketplaceListContext } = useMarketplaceListContext();
+
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [isView, setIsView] = useState<"view" | "sell" | "">("");
   const [modal, setModal] = useState(false);
@@ -48,14 +51,19 @@ export const DatesPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        dateCardData.length > 0 ? (
+        marketplaceListContext?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
                 <h3>Date Cards</h3>
                 <ButtonGroup>
                   <Button className="buy-button">Buy Cards</Button>
-                  <Button className="buy-button">Buy Packs</Button>
+                  <Button
+                    className="buy-button"
+                    onClick={() => navigate("/buy")}
+                  >
+                    Buy Packs
+                  </Button>
                 </ButtonGroup>
               </DatePageTitleWrapper>
               <FilterSection />
@@ -83,7 +91,9 @@ export const DatesPage: React.FC = () => {
             <h3>No Date Cards</h3>
             <p>It looks like you don’t have any date cards yet. </p>
             <Button className="buy-button">Buy Cards</Button>
-            <Button className="buy-button">Buy Packs</Button>
+            <Button className="buy-button" onClick={() => navigate("/buy")}>
+              Buy Packs
+            </Button>
           </EmptyCards>
         )
       ) : (

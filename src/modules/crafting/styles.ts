@@ -191,7 +191,7 @@ export const CraftCard = styled.div<{ bg: string }>`
   }
 `;
 
-export const SelectButton = styled.div<{ disabled?: string }>`
+export const SelectButton = styled.div<{ disabled: boolean }>`
   width: 100%;
   background-color: #000;
   border-radius: 40px;

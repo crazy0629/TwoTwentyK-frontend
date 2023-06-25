@@ -6,7 +6,7 @@ import {
   DatePageTitleWrapper,
   DatesPageWrapper,
   EmptyCards,
-} from "../dates/styles";
+} from "./styles";
 import { Button, SellConfirmModal } from "../../../components";
 import {
   CardGridSection,
@@ -14,21 +14,21 @@ import {
   SellDateCardSection,
   ViewDateCardSection,
 } from "../../../modules";
-import { triggerCardData } from "./data";
+import { dateCardData } from "./data";
 import { useNavigate } from "react-router-dom";
 import { useMarketplaceListContext } from "../../../context";
 
-export const TriggersPage: React.FC = () => {
+export const CategoriesPage: React.FC = () => {
   const navigate = useNavigate();
+  const { marketplaceListContext } = useMarketplaceListContext();
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [isView, setIsView] = useState<"view" | "sell" | "">("");
-  const { marketplaceListContext } = useMarketplaceListContext();
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     setCurrentUser(localStorage.getItem("auth"));
   }, []);
 
-  const [modal, setModal] = useState(false);
   const handleSellConfirm = () => {
     setModal(true);
     setIsView("");
@@ -39,7 +39,7 @@ export const TriggersPage: React.FC = () => {
   };
 
   const handleCraft = (id: string | number) => {
-    navigate("/crafting/predictions");
+    navigate("/crafting/identities");
   };
 
   const handleSell = (id: string | number) => {
@@ -54,7 +54,7 @@ export const TriggersPage: React.FC = () => {
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
-                <h3>Triggers</h3>
+                <h3>Category Cards</h3>
                 <ButtonGroup>
                   <Button className="buy-button">Buy Cards</Button>
                   <Button
@@ -67,22 +67,19 @@ export const TriggersPage: React.FC = () => {
               </DatePageTitleWrapper>
               <FilterSection />
               <CardGridSection
-                data={triggerCardData}
-                cardType={"trigger"}
+                data={dateCardData}
                 onCraft={handleCraft}
                 onSell={handleSell}
                 onView={handleView}
               />
               <ViewDateCardSection
                 isView={isView === "view"}
-                cardType="trigger"
                 id={"asdfa"}
                 onClose={() => setIsView("")}
               />
               <SellDateCardSection
                 onSellConfirm={handleSellConfirm}
                 isView={isView === "sell"}
-                cardType="trigger"
                 id={"asdfa"}
                 onClose={() => setIsView("")}
               />
@@ -90,8 +87,8 @@ export const TriggersPage: React.FC = () => {
           </DatesPageWrapper>
         ) : (
           <EmptyCards>
-            <h3>No Triggers</h3>
-            <p>It looks like you don’t have any triggers yet.   </p>
+            <h3>No Date Cards</h3>
+            <p>It looks like you don’t have any category cards yet.  </p>
             <Button className="buy-button">Buy Cards</Button>
             <Button className="buy-button" onClick={() => navigate("/buy")}>
               Buy Packs

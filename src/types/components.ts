@@ -1,3 +1,4 @@
+import { IMarketplaceListing } from "./actions";
 import { CardActionTypes } from "./common";
 
 export type SocialAuthButtonProps = {
@@ -47,11 +48,12 @@ export type PredictionCardProps = {
   icon?: React.ReactNode;
   iconText?: string;
   isNotHover?: boolean;
+  onClick?: () => void;
   onView?: () => void;
   onCraft?: () => void;
   onSell?: () => void;
   onBuy?: () => void;
-};
+} & IMarketplaceListing;
 
 export type FeedItemProps = {
   date: string;
@@ -200,4 +202,4 @@ export type MarketCardProps = {
   status?: string;
   owned?: string | number;
   onCard?: (id: string | number, action: CardActionTypes) => void;
-};
+} & IMarketplaceListing;

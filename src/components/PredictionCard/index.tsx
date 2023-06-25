@@ -8,14 +8,26 @@ import {
   CardTypeWrapper,
   PredictionCardWrapper,
 } from "./styles";
-import { PredictionCardProps } from "../../types";
 import {
   CardButton,
   CardButtonGroup,
   CardOverlayWrapper,
 } from "../DateCard/styles";
+import { IMarketplaceListing } from "../../types/actions";
+import { PredictionCardProps } from "../../types";
 
-export const PredictionCard: React.FC<PredictionCardProps> = ({
+export const PredictionCard: React.FC<
+  IMarketplaceListing & PredictionCardProps
+> = ({
+  created_at,
+  id,
+  is_listed,
+  nft_collection_id,
+  nft_id,
+  owner,
+  owner_id,
+  price,
+  ///////////////////////////////////
   image,
   amount,
   date,
@@ -26,6 +38,7 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({
   icon,
   iconText,
   isNotHover,
+  onClick,
   onCraft,
   onSell,
   onView,
@@ -33,6 +46,7 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({
 }) => {
   return (
     <PredictionCardWrapper
+      onClick={onClick}
       bg={image}
       height={height}
       isnothover={isNotHover ? "true" : undefined}

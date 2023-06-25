@@ -11,32 +11,91 @@ import {
   EmptyCardWrapper,
   SeeMoreButton,
 } from "./styles";
-import { feedData, identitiesData, newFeedData, predictionData } from "./data";
+import { identitiesData, predictionData } from "./data";
 import { Button, FeedItem, PredictionCard } from "../../../components";
+import { IArticle, IMarketplaceListing } from "../../../types/actions";
+import { ToastContainer } from "react-toastify";
+import {
+  useFeedContext,
+  useMarketplaceListContext,
+  useMyFeedContext,
+} from "../../../context";
 
 export const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(8);
+
+  const { feedContext } = useFeedContext();
+  const { myFeedContext } = useMyFeedContext();
+  const { marketplaceListContext } = useMarketplaceListContext();
+
   const [currentUser, setCurrentUser] = useState<string | null>("");
-  const totalPages = 20;
+  const [pageAllFeeds, setPageAllFeeds] = useState<IArticle[]>([]);
+  const [afCurrentPage, setAFCurrentPage] = useState(1);
+  const [pageMyFeeds, setPageMyFeeds] = useState<IArticle[]>([]);
+  const [myCurrentPage, setMYCurrentPage] = useState(1);
 
   useEffect(() => {
     setCurrentUser(localStorage.getItem("auth"));
   }, []);
 
+  useEffect(() => {
+    if (feedContext?.length > 0) setPageAllFeeds(feedContext.slice(0, 5));
+  }, [feedContext]);
+
+  useEffect(() => {
+    setPageMyFeeds(myFeedContext?.slice(0, 5));
+  }, [myFeedContext]);
+
+  const handlePagination = (number: number, key: string) => {
+    if (key === "all") {
+      setAFCurrentPage(number);
+      setPageAllFeeds(
+        feedContext.slice(5 * (number - 1), 5 * (number - 1) + 5)
+      );
+    } else if (key === "my") {
+      setMYCurrentPage(number);
+      setPageMyFeeds(
+        myFeedContext.slice(5 * (number - 1), 5 * (number - 1) + 5)
+      );
+    }
+  };
+
   return (
     <AppLayout>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <DashboardPageWrapper>
         <DashboardCardWrapper>
           <CardTitle>My Identities</CardTitle>
-          {identitiesData.length > 0 && currentUser ? (
+          {marketplaceListContext?.length > 0 && currentUser ? (
             <React.Fragment>
               <DashboardCardGrid>
-                {identitiesData.map((item, key) => (
-                  <PredictionCard {...item} key={key} />
-                ))}
+                {marketplaceListContext
+                  ?.slice(0, 4) //////////////////// Have to add some filter by collection id
+                  .map((item: IMarketplaceListing, key: number) => (
+                    <PredictionCard
+                      {...identitiesData[key]}
+                      {...item}
+                      onClick={() =>
+                        navigate("/dashboard/identities?id=" + item.nft_id)
+                      }
+                      key={key}
+                    />
+                  ))}
               </DashboardCardGrid>
-              <SeeMoreButton>See More</SeeMoreButton>
+              <SeeMoreButton onClick={() => navigate("/dashboard/identities")}>
+                See More
+              </SeeMoreButton>
             </React.Fragment>
           ) : (
             <EmptyCardWrapper>
@@ -46,7 +105,10 @@ export const DashboardPage: React.FC = () => {
               </p>
               <img src="/assets/identities-empty.png" alt="" />
               {currentUser && (
-                <Button className="dashboard-card-button">
+                <Button
+                  className="dashboard-card-button"
+                  onClick={() => navigate("/crafting/identities")}
+                >
                   Craft an Identity Now
                 </Button>
               )}
@@ -55,14 +117,25 @@ export const DashboardPage: React.FC = () => {
         </DashboardCardWrapper>
         <DashboardCardWrapper>
           <CardTitle>My Predictions</CardTitle>
-          {predictionData.length > 0 && currentUser ? (
+          {marketplaceListContext.length > 0 && currentUser ? (
             <React.Fragment>
               <DashboardCardGrid>
-                {predictionData.map((item, key) => (
-                  <PredictionCard {...item} key={key} />
-                ))}
+                {marketplaceListContext
+                  ?.slice(0, 4) //////////////////// Have to add some filter by collection id
+                  .map((item: IMarketplaceListing, key: number) => (
+                    <PredictionCard
+                      onClick={() =>
+                        navigate("/dashboard/predictions?id=" + item.nft_id)
+                      }
+                      {...predictionData[key]}
+                      {...item}
+                      key={key}
+                    />
+                  ))}
               </DashboardCardGrid>
-              <SeeMoreButton>See More</SeeMoreButton>
+              <SeeMoreButton onClick={() => navigate("/dashboard/predictions")}>
+                See More
+              </SeeMoreButton>
             </React.Fragment>
           ) : (
             <EmptyCardWrapper>
@@ -71,42 +144,45 @@ export const DashboardPage: React.FC = () => {
               </p>
               <img src="/assets/prediction-empty.png" alt="" />
               {currentUser && (
-                <Button className="dashboard-card-button">
+                <Button
+                  className="dashboard-card-button"
+                  onClick={() => navigate("/crafting/predictions")}
+                >
                   Craft an Identity Now
                 </Button>
               )}
             </EmptyCardWrapper>
           )}
         </DashboardCardWrapper>
-        {currentUser && feedData.length > 0 && (
+        {currentUser && myFeedContext?.length > 0 && (
           <DashboardCardWrapper>
             <CardTitle>My Feed</CardTitle>
             <DashboardListGrid>
-              {feedData.map((item, key) => (
+              {pageMyFeeds.map((item, key) => (
                 <FeedItem {...item} key={key} />
               ))}
             </DashboardListGrid>
             <ResponsivePagination
               maxWidth={272}
-              current={currentPage}
-              total={totalPages}
-              onPageChange={setCurrentPage}
+              current={myCurrentPage}
+              total={Math.round(Number(myFeedContext?.length / 5))}
+              onPageChange={(page) => handlePagination(page, "my")}
             />
           </DashboardCardWrapper>
         )}
-        {currentUser && newFeedData.length > 0 && (
+        {currentUser && feedContext?.length > 0 && (
           <DashboardCardWrapper>
             <CardTitle>TwoTwentyK News Feed</CardTitle>
             <DashboardListGrid>
-              {newFeedData.map((item, key) => (
+              {pageAllFeeds?.map((item, key) => (
                 <FeedItem {...item} key={key} />
               ))}
             </DashboardListGrid>
             <ResponsivePagination
               maxWidth={272}
-              current={currentPage}
-              total={totalPages}
-              onPageChange={setCurrentPage}
+              current={afCurrentPage}
+              total={Math.round(Number(feedContext.length / 5))}
+              onPageChange={(page) => handlePagination(page, "all")}
             />
           </DashboardCardWrapper>
         )}

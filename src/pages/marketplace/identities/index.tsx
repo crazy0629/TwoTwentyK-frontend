@@ -12,8 +12,14 @@ import {
   MSellCardSection,
   MViewCardSection,
 } from "../../../modules";
+import { useNavigate } from "react-router-dom";
+import { useMarketplaceListContext } from "../../../context";
+import { EmptyCards } from "../../app/category/styles";
+import { Button } from "../../../components";
 
 export const MarketplaceIdentitiesPage: React.FC = () => {
+  const navigate = useNavigate();
+  const marketplaceListContext = useMarketplaceListContext();
   const [side, setSide] = useState<CardActionTypes>("");
 
   const handleCardClick = (id: string | number, action: CardActionTypes) => {
@@ -26,11 +32,24 @@ export const MarketplaceIdentitiesPage: React.FC = () => {
   return (
     <AppLayout>
       <MarketplacePageWrapper sidebar={side !== "" ? "true" : undefined}>
-        <MarketplacePageContainer>
-          <h2>Cards</h2>
-          <FilterSection />
-          <MCardGridSection onCardClick={handleCardClick} page="identities" />
-        </MarketplacePageContainer>
+        {marketplaceListContext?.length > 0 ? (
+          <MarketplacePageContainer>
+            <h2>Identities</h2>
+            <FilterSection />
+            <MCardGridSection onCardClick={handleCardClick} page="identities" />
+          </MarketplacePageContainer>
+        ) : (
+          <EmptyCards>
+            <h3>No List</h3>
+            <p>It looks like there is no card list to open.  </p>
+            <Button
+              className="buy-button"
+              onClick={() => navigate("/dashboard")}
+            >
+              Go to Dashboard
+            </Button>
+          </EmptyCards>
+        )}
       </MarketplacePageWrapper>
       <MViewCardSection
         open={side === "view"}

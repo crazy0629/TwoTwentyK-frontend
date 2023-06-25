@@ -15,13 +15,23 @@ import {
   ViewDateCardSection,
 } from "../../../modules";
 import { identitiesData } from "./data";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useMarketplaceListContext } from "../../../context";
 
 export const IdentitiesPage: React.FC = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const { marketplaceListContext } = useMarketplaceListContext();
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [isView, setIsView] = useState<"view" | "sell" | "">("");
   const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    if (params.get("id")) {
+      setIsView("view");
+    }
+  }, [params]);
 
   useEffect(() => {
     setCurrentUser(localStorage.getItem("auth"));
@@ -48,13 +58,18 @@ export const IdentitiesPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        identitiesData.length > 0 ? (
+        marketplaceListContext?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
                 <h3>Identities</h3>
                 <ButtonGroup>
-                  <Button className="craft-button">Craft Identity</Button>
+                  <Button
+                    className="craft-button"
+                    onClick={() => navigate("/crafting/identities")}
+                  >
+                    Craft Identity
+                  </Button>
                 </ButtonGroup>
               </DatePageTitleWrapper>
               <FilterSection />
@@ -88,7 +103,12 @@ export const IdentitiesPage: React.FC = () => {
               card and a Category card. Identities are combined with Trigger
               cards to craft Predictions.
             </p>
-            <Button className="buy-button">Craft Identity</Button>
+            <Button
+              className="buy-button"
+              onClick={() => navigate("/crafting/identities")}
+            >
+              Craft Identity
+            </Button>
           </EmptyCards>
         )
       ) : (
