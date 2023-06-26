@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BackProfile,
   ProfileEditContent,
@@ -12,19 +12,32 @@ import { ProfileConfirmModal } from "../../../components/Modals/ProfileConfirmMo
 import { ChangeUsername } from "./ChangeUsername";
 import { Notify } from "../../../components";
 import { ChangePhoneNumber } from "./ChangePhoneNumber";
+import { useMyInfoContext } from "../../../context";
 
 export const ProfileSection: React.FC = () => {
+  const { myInfoContext } = useMyInfoContext();
   const [status, setStatus] = useState<string>("");
   const [modal, setModal] = useState(false);
   const [notify, setNotify] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
-  const [data, setData] = useState({
+  const [data, setData] = useState<any>({
     username: "Moulee",
     name: "",
     phone: "352 285 4769",
     email: "moulee@example.com",
     password: "123456789",
   });
+
+  useEffect(() => {
+    if (myInfoContext)
+      setData((prev: any) => ({
+        username: myInfoContext?.username,
+        name: prev.name,
+        phone: prev.phone,
+        email: myInfoContext?.email,
+        password: myInfoContext?.password,
+      }));
+  }, [myInfoContext]);
 
   const handleModalClose = () => {
     setStatus("");
@@ -40,13 +53,13 @@ export const ProfileSection: React.FC = () => {
   };
 
   const handleChangePassword = (password: string) => {
-    setData((prev) => ({ ...prev, password: password }));
+    setData((prev: any) => ({ ...prev, password: password }));
     setModalTitle("Password");
     setModal(true);
   };
 
   const handleChangeUsername = (username: string) => {
-    setData((prev) => ({ ...prev, username: username }));
+    setData((prev: any) => ({ ...prev, username: username }));
     setModalTitle("username");
     setNotify(true);
     setTimeout(() => {
@@ -56,7 +69,7 @@ export const ProfileSection: React.FC = () => {
   };
 
   const handleChangeName = (name: string) => {
-    setData((prev) => ({ ...prev, name: name }));
+    setData((prev: any) => ({ ...prev, name: name }));
     setModalTitle("name");
     setNotify(true);
     setTimeout(() => {
@@ -66,7 +79,7 @@ export const ProfileSection: React.FC = () => {
   };
 
   const handleChangePhone = (phone: string) => {
-    setData((prev) => ({ ...prev, phone: phone }));
+    setData((prev: any) => ({ ...prev, phone: phone }));
     setModalTitle("Phone Number");
     setModal(true);
   };

@@ -1,6 +1,15 @@
 import api from "../config/api";
 import { MarketplaceListObjectParams } from "../types/actions";
 
+export const getMarketplaceList = async () => {
+  try {
+    const res = await api.get("/marketplace_listing");
+    return { success: true, data: res.data };
+  } catch (error) {
+    return { success: false, message: "Server Error!" };
+  }
+};
+
 export const getMarketplaceListByFilter = async (filter: string) => {
   try {
     const res = await api.get("/marketplace_listing?q=" + filter);

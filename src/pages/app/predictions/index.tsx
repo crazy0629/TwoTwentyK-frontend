@@ -15,12 +15,22 @@ import {
   ViewDateCardSection,
 } from "../../../modules";
 import { predictionData } from "./data";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useMarketplaceListContext } from "../../../context";
 
 export const PredictionsPage: React.FC = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [isView, setIsView] = useState<"view" | "sell" | "">("");
+  const { marketplaceListContext } = useMarketplaceListContext();
+
+  useEffect(() => {
+    if (params.get("id")) {
+      setIsView("view");
+    }
+  }, [params]);
 
   useEffect(() => {
     setCurrentUser(localStorage.getItem("auth"));
@@ -48,13 +58,18 @@ export const PredictionsPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        predictionData.length > 0 ? (
+        marketplaceListContext?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
-                <h3>Identities</h3>
+                <h3>Predictions</h3>
                 <ButtonGroup>
-                  <Button className="craft-button">Craft Identity</Button>
+                  <Button
+                    className="craft-button"
+                    onClick={() => navigate("/crafting/predictions")}
+                  >
+                    Craft Prediction
+                  </Button>
                 </ButtonGroup>
               </DatePageTitleWrapper>
               <FilterSection />
@@ -82,13 +97,17 @@ export const PredictionsPage: React.FC = () => {
           </DatesPageWrapper>
         ) : (
           <EmptyCards>
-            <h3>No Identities Yet</h3>
+            <h3>No Predictions Yet</h3>
             <p>
-              Identities are cards created by combining a Day-Month card, a Year
-              card and a Category card. Identities are combined with Trigger
-              cards to craft Predictions.
+              Predictions are created by combining an Identity and one or more
+              Trigger cards
             </p>
-            <Button className="buy-button">Craft Identity</Button>
+            <Button
+              className="buy-button"
+              onClick={() => navigate("/crafting/identities")}
+            >
+              Craft Prediction
+            </Button>
           </EmptyCards>
         )
       ) : (

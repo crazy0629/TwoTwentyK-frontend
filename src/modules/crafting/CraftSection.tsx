@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   EmptyCraftCard,
   CraftCardGroup,
@@ -20,18 +20,48 @@ export const CraftSection: React.FC<{
     [key: string]: string | number | null;
   };
   onCraftChanged: (key: string) => void;
+  onCraft: (page: "identity" | "prediction") => void;
   selectedCraft: string;
-}> = ({ page, onCraftChanged, selectedCraft, selectedCards }) => {
+}> = ({ page, onCraftChanged, selectedCraft, selectedCards, onCraft }) => {
   return (
     <CraftSectionWrapper>
       <TitleWrapper>
         <h3>
           {page === "identity" ? "Craft an Identity" : "Craft a Prediction"}
         </h3>
-        <Button className="craft-button" disabled>
-          Craft {page === "identity" ? "Identity" : "Prediction"}
-        </Button>
+        {page === "identity" && (
+          <Button
+            className="craft-button"
+            disabled={
+              !(
+                Number(selectedCards.crafting) > -1 &&
+                Number(selectedCards.dayMonth) > -1 &&
+                Number(selectedCards.category) > -1 &&
+                Number(selectedCards.year) > -1
+              )
+            }
+            onClick={() => onCraft(page)}
+          >
+            Craft Identity
+          </Button>
+        )}
+        {page === "prediction" && (
+          <Button
+            className="craft-button"
+            disabled={
+              !(
+                Number(selectedCards.crafting) > -1 &&
+                Number(selectedCards.identity) > -1 &&
+                Number(selectedCards.trigger) > -1
+              )
+            }
+            onClick={() => onCraft(page)}
+          >
+            Craft Prediction
+          </Button>
+        )}
       </TitleWrapper>
+
       <p>
         {page === "identity"
           ? "Identities are cards crafted by combining a Day-Month card, a Year card and a Category card. Select one card of each type to craft an Identity."

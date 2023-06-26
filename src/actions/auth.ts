@@ -22,3 +22,21 @@ export const register = async ({
     return { success: false, message: "Server Error!" };
   }
 };
+
+export const getMyInfo = async () => {
+  try {
+    const res = await api.get("/auth/login");
+    return { success: true, data: res.data };
+  } catch (error) {
+    return { success: false, message: "Server Error!" };
+  }
+};
+
+export const getMyNFTs = async () => {
+  try {
+    const res = await api.get("/me/nfts");
+    return { success: true, data: res.data };
+  } catch (error) {
+    return { success: false, message: "Server Error!" };
+  }
+};

@@ -63,8 +63,8 @@ export const SelectCardSection: React.FC<{
                 className="select-button"
                 disabled={
                   clickedCard !== key || selectedCard === key
-                    ? "true"
-                    : undefined
+                  // ? "true"
+                  // : undefined
                 }
                 onClick={
                   clickedCard !== key || selectedCard === key

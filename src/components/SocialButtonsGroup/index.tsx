@@ -20,7 +20,7 @@ export const SocialButtonsGroup: React.FC<SocialButtonsGroupProps> = ({
         clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com" // need to change
         buttonText="Login"
         onSuccess={(res) => onGoogleAuthClicked(res, authType)}
-        onFailure={(res) => onGoogleAuthClicked(res, authType)}
+        // onFailure={(res) => onGoogleAuthClicked(res, authType)}
         render={(renderProps) => (
           <SocialAuthButton
             authType={authType}

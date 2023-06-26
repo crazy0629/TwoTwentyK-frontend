@@ -4,7 +4,7 @@ import {
   PredictionCraftingParams,
 } from "../types/actions";
 
-export const getCraftingIdentity = async (newCraft: IdentityCraftingParams) => {
+export const craftingIdentity = async (newCraft: IdentityCraftingParams) => {
   try {
     const res = await api.post("/crafting/identity", newCraft);
     return { success: true, data: res.data };
@@ -13,7 +13,7 @@ export const getCraftingIdentity = async (newCraft: IdentityCraftingParams) => {
   }
 };
 
-export const getCraftingPrediction = async (
+export const craftingPrediction = async (
   newCraft: PredictionCraftingParams
 ) => {
   try {

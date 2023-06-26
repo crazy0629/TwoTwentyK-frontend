@@ -18,7 +18,7 @@ export const CraftingPredictionsPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [selectedCraft, setSelectedCraft] = useState("crafting");
-  const [clickedCard, setClickedCard] = useState<number | string | null>(null);
+  const [clickedCard, setClickedCard] = useState<number | string | null>(-1);
   const [selectedCard, setSelectedCard] = useState<number | string | null>(-1);
   const [selectedCards, setSelectedCards] = useState<{
     crafting: number | string | null;
@@ -40,9 +40,18 @@ export const CraftingPredictionsPage: React.FC = () => {
   };
 
   const handleCardSelected = (id: string | number | null, craft: string) => {
+    console.log(selectedCards);
     setSelectedCards((prev) => ({ ...prev, [craft]: id }));
     setSelectedCard(id);
   };
+  const handleCraft = (page: "identity" | "prediction") => {
+    page === "identity" && craftIdentity();
+    page === "prediction" && craftPrediction();
+  };
+
+  const craftIdentity = () => {};
+
+  const craftPrediction = () => {};
 
   return (
     <AppLayout noFooter>
@@ -51,6 +60,7 @@ export const CraftingPredictionsPage: React.FC = () => {
           <>
             <CraftLeftWrapper>
               <CraftSection
+                onCraft={handleCraft}
                 page="prediction"
                 onCraftChanged={setSelectedCraft}
                 selectedCards={selectedCards}

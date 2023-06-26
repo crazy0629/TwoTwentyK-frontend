@@ -23,7 +23,7 @@ export const SignUpForm: React.FC = () => {
   const [error, setError] = useState({ username: "", email: "", password: "" });
   const [isAgree, setIsAgree] = useState(true);
 
-  const handleSignIn = async () => {
+  const handleSignup = async () => {
     const { isValid, errors } = signupFormValidation(form);
     setError(errors);
     if (isValid) {
@@ -100,7 +100,7 @@ export const SignUpForm: React.FC = () => {
         </span>
       </SignUpCheckbox>
       <FormActionWrapper>
-        <Button onClick={handleSignIn} disabled={isAgree}>
+        <Button onClick={handleSignup} disabled={isAgree}>
           Sign Up
         </Button>
         <FormActionText>
