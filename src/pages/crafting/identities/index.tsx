@@ -21,14 +21,16 @@ export const CraftingIdentitesPage: React.FC = () => {
   const [selectedCards, setSelectedCards] = useState<{
     crafting: number | string | null;
     year: number | string | null;
-    dayMonth: number | string | null;
+    day: number | string | null;
+    month: number | string | null;
     category: number | string | null;
     identity: number | string | null;
     trigger: number | string | null;
   }>({
     crafting: -1,
     category: -1,
-    dayMonth: -1,
+    day: -1,
+    month: -1,
     year: -1,
     identity: -1,
     trigger: -1,
@@ -52,30 +54,16 @@ export const CraftingIdentitesPage: React.FC = () => {
   };
   const handleCraft = (page: "identity" | "prediction") => {
     page === "identity" && craftIdentity();
-    page === "prediction" && craftPrediction();
   };
 
   const craftIdentity = async () => {
     const newCraft = {
-      nft_day_id: Number(selectedCards.dayMonth),
-      nft_month_id: Number(selectedCards.category),
+      nft_day_id: Number(selectedCards.day),
+      nft_month_id: Number(selectedCards.month),
       nft_year_id: Number(selectedCards.year),
       celebrity_id: Number(selectedCards.crafting),
     };
     const res = await craftingIdentity(newCraft);
-    if (res.success) {
-      toast.success("Crafted Successfully.");
-    } else {
-      toast.error(res.message);
-    }
-  };
-
-  const craftPrediction = async () => {
-    const newCraft = {
-      nft_identity_id: Number(selectedCards.identity),
-      nft_trigger_id: Number(selectedCards.trigger),
-    };
-    const res = await craftingPrediction(newCraft);
     if (res.success) {
       toast.success("Crafted Successfully.");
     } else {

@@ -15,8 +15,11 @@ export const CraftSection: React.FC<{
   selectedCards: {
     crafting: number | string | null;
     year: number | string | null;
-    dayMonth: number | string | null;
+    day: number | string | null;
+    month: number | string | null;
     category: number | string | null;
+    identity: number | string | null;
+    trigger: number | string | null;
     [key: string]: string | number | null;
   };
   onCraftChanged: (key: string) => void;
@@ -35,7 +38,8 @@ export const CraftSection: React.FC<{
             disabled={
               !(
                 Number(selectedCards.crafting) > -1 &&
-                Number(selectedCards.dayMonth) > -1 &&
+                Number(selectedCards.day) > -1 &&
+                Number(selectedCards.month) > -1 &&
                 Number(selectedCards.category) > -1 &&
                 Number(selectedCards.year) > -1
               )
