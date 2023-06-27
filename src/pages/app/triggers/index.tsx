@@ -16,13 +16,13 @@ import {
 } from "../../../modules";
 import { triggerCardData } from "./data";
 import { useNavigate } from "react-router-dom";
-import { useMarketplaceListContext } from "../../../context";
+import { useMyNFTsContext } from "../../../context";
 
 export const TriggersPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [isView, setIsView] = useState<"view" | "sell" | "">("");
-  const { marketplaceListContext } = useMarketplaceListContext();
+  const { myNFTsContext } = useMyNFTsContext();
 
   useEffect(() => {
     setCurrentUser(localStorage.getItem("auth"));
@@ -50,7 +50,7 @@ export const TriggersPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        marketplaceListContext?.length > 0 ? (
+        myNFTsContext?.nft_card_trigger?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>

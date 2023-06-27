@@ -9,11 +9,13 @@ import {
 } from "../../../modules";
 import { Button } from "../../../components";
 import { useNavigate } from "react-router-dom";
-import { craftingIdentity, craftingPrediction } from "../../../actions";
+import { craftingIdentity, getMyNFTs } from "../../../actions";
 import { ToastContainer, toast } from "react-toastify";
+import { useMyNFTsContext } from "../../../context";
 
 export const CraftingIdentitesPage: React.FC = () => {
   const navigate = useNavigate();
+  const { setMyNFTsContext } = useMyNFTsContext();
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [selectedCraft, setSelectedCraft] = useState("crafting");
   const [clickedCard, setClickedCard] = useState<number | string | null>(-1);
@@ -66,6 +68,8 @@ export const CraftingIdentitesPage: React.FC = () => {
     const res = await craftingIdentity(newCraft);
     if (res.success) {
       toast.success("Crafted Successfully.");
+      const myNFTs = await getMyNFTs();
+      setMyNFTsContext(myNFTs.data);
     } else {
       toast.error(res.message);
     }

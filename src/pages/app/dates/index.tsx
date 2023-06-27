@@ -16,11 +16,11 @@ import {
 } from "../../../modules";
 import { dateCardData } from "./data";
 import { useNavigate } from "react-router-dom";
-import { useMarketplaceListContext } from "../../../context";
+import { useMyNFTsContext } from "../../../context";
 
 export const DatesPage: React.FC = () => {
   const navigate = useNavigate();
-  const { marketplaceListContext } = useMarketplaceListContext();
+  const { myNFTsContext } = useMyNFTsContext();
 
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [isView, setIsView] = useState<"view" | "sell" | "">("");
@@ -51,7 +51,9 @@ export const DatesPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        marketplaceListContext?.length > 0 ? (
+        myNFTsContext?.nft_card_day
+          .concat(myNFTsContext?.nft_card_month)
+          .concat(myNFTsContext?.nft_card_year)?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
@@ -68,7 +70,9 @@ export const DatesPage: React.FC = () => {
               </DatePageTitleWrapper>
               <FilterSection />
               <CardGridSection
-                data={dateCardData}
+                data={myNFTsContext?.nft_card_day
+                  .concat(myNFTsContext?.nft_card_month)
+                  .concat(myNFTsContext?.nft_card_year)}
                 onCraft={handleCraft}
                 onSell={handleSell}
                 onView={handleView}

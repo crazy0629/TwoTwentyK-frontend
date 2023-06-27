@@ -153,3 +153,66 @@ export const matchList = [
     name: "Emma Watson",
   },
 ];
+
+export const triggerList = [
+  {
+    type: "Major",
+    name: "Death",
+  },
+  {
+    type: "Minor 1",
+    name: "Divorce",
+  },
+  {
+    type: "Major",
+    name: "Pregnancy",
+  },
+  {
+    type: "Minor 2",
+    name: "Nominated for best actor award but does not win",
+  },
+  {
+    type: "Minor 2",
+    name: "Marriage",
+  },
+  {
+    type: "Major",
+    name: "Death",
+  },
+  {
+    type: "Minor 1",
+    name: "Divorce",
+  },
+  {
+    type: "Major",
+    name: "Pregnancy",
+  },
+  {
+    type: "Minor 2",
+    name: "Nominated for best actor award but does not win",
+  },
+  {
+    type: "Minor 2",
+    name: "Marriage",
+  },
+  {
+    type: "Major",
+    name: "Death",
+  },
+  {
+    type: "Minor 1",
+    name: "Divorce",
+  },
+  {
+    type: "Major",
+    name: "Pregnancy",
+  },
+  {
+    type: "Minor 2",
+    name: "Nominated for best actor award but does not win",
+  },
+  {
+    type: "Minor 2",
+    name: "Marriage",
+  },
+];

@@ -16,12 +16,12 @@ import {
 } from "../../../modules";
 import { identitiesData } from "./data";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useMarketplaceListContext } from "../../../context";
+import { useMyNFTsContext } from "../../../context";
 
 export const IdentitiesPage: React.FC = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const { marketplaceListContext } = useMarketplaceListContext();
+  const { myNFTsContext } = useMyNFTsContext();
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [isView, setIsView] = useState<"view" | "sell" | "">("");
@@ -58,7 +58,7 @@ export const IdentitiesPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        marketplaceListContext?.length > 0 ? (
+        myNFTsContext?.nft_card_identity?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
@@ -74,7 +74,7 @@ export const IdentitiesPage: React.FC = () => {
               </DatePageTitleWrapper>
               <FilterSection />
               <CardGridSection
-                identityData={identitiesData}
+                identityData={myNFTsContext?.nft_card_identity}
                 onCraft={handleCraft}
                 onSell={handleSell}
                 cardType="identity"

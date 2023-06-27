@@ -338,6 +338,7 @@ export const MatchListInfoWrapper = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
+    flex: 1;
   }
 `;
 
@@ -353,4 +354,29 @@ export const ItemIconWrapper = styled.div`
   svg {
     width: 27px;
   }
+`;
+
+export const TriggerListType = styled.div`
+  &::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    background: #000000;
+    opacity: 0.5;
+  }
+  height: 32px;
+  min-width: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin-right: 10px;
+  background: #f3f4fa;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12.604px;
+  text-transform: uppercase;
 `;

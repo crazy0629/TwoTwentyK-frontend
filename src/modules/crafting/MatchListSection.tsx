@@ -8,9 +8,10 @@ import {
   MatchListInfoWrapper,
   MatchListItemWrapper,
   MatchListSectionWrapper,
+  TriggerListType,
 } from "./styles";
 import { IconInfo } from "../../components";
-import { matchList } from "./data";
+import { matchList, triggerList } from "./data";
 
 export const MatchListSection: React.FC<{
   page: "identity" | "prediction";
@@ -34,15 +35,19 @@ export const MatchListSection: React.FC<{
       )}
       {Number(clickedCard) > -1 && (
         <MatchListGroup>
-          {matchList.map((item, key) => (
-            <MatchListItem
-              {...item}
-              key={key}
-              id={key}
-              onCollapsed={setCollapsed}
-              collapsed={collapsed === key}
-            />
-          ))}
+          {page === "prediction"
+            ? triggerList.map((item, key) => (
+                <TriggerListItem key={key} {...item} />
+              ))
+            : matchList.map((item, key) => (
+                <MatchListItem
+                  {...item}
+                  key={key}
+                  id={key}
+                  onCollapsed={setCollapsed}
+                  collapsed={collapsed === key}
+                />
+              ))}
         </MatchListGroup>
       )}
     </MatchListSectionWrapper>
@@ -91,6 +96,25 @@ const MatchListItem: React.FC<{
           </ItemContentInfoWrapper>
         </ItemContent>
       )}
+    </MatchListItemWrapper>
+  );
+};
+
+const TriggerListItem: React.FC<{ type: string; name: string }> = ({
+  type,
+  name,
+}) => {
+  return (
+    <MatchListItemWrapper>
+      <ItemHeader>
+        <MatchListInfoWrapper>
+          <TriggerListType> {type}</TriggerListType>
+          <p>{name}</p>
+        </MatchListInfoWrapper>
+        <div>
+          <IconInfo />
+        </div>
+      </ItemHeader>
     </MatchListItemWrapper>
   );
 };

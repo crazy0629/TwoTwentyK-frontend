@@ -61,6 +61,9 @@ export const EmptyCards = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  .capitalize {
+    text-transform: capitalize;
+  }
   h3 {
     font-weight: 500;
     font-size: 24px;

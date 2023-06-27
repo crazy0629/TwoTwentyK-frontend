@@ -19,7 +19,7 @@ import { useMarketplaceListContext } from "../../../context";
 
 export const MarketplacePredictionPage: React.FC = () => {
   const navigate = useNavigate();
-  const marketplaceListContext = useMarketplaceListContext();
+  const { marketplaceListContext } = useMarketplaceListContext();
   const [side, setSide] = useState<CardActionTypes>("");
 
   const handleCardClick = (id: string | number, action: CardActionTypes) => {

@@ -19,6 +19,7 @@ import {
   useFeedContext,
   useMarketplaceListContext,
   useMyFeedContext,
+  useMyNFTsContext,
 } from "../../../context";
 
 export const DashboardPage: React.FC = () => {
@@ -26,7 +27,7 @@ export const DashboardPage: React.FC = () => {
 
   const { feedContext } = useFeedContext();
   const { myFeedContext } = useMyFeedContext();
-  const { marketplaceListContext } = useMarketplaceListContext();
+  const { myNFTsContext } = useMyNFTsContext();
 
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [pageAllFeeds, setPageAllFeeds] = useState<IArticle[]>([]);
@@ -77,10 +78,10 @@ export const DashboardPage: React.FC = () => {
       <DashboardPageWrapper>
         <DashboardCardWrapper>
           <CardTitle>My Identities</CardTitle>
-          {marketplaceListContext?.length > 0 && currentUser ? (
+          {myNFTsContext?.nft_card_identity?.length > 0 && currentUser ? (
             <React.Fragment>
               <DashboardCardGrid>
-                {marketplaceListContext
+                {myNFTsContext?.nft_card_identity
                   ?.slice(0, 4) //////////////////// Have to add some filter by collection id
                   .map((item: IMarketplaceListing, key: number) => (
                     <PredictionCard
@@ -117,10 +118,10 @@ export const DashboardPage: React.FC = () => {
         </DashboardCardWrapper>
         <DashboardCardWrapper>
           <CardTitle>My Predictions</CardTitle>
-          {marketplaceListContext.length > 0 && currentUser ? (
+          {myNFTsContext?.nft_card_prediction.length > 0 && currentUser ? (
             <React.Fragment>
               <DashboardCardGrid>
-                {marketplaceListContext
+                {myNFTsContext?.nft_card_prediction
                   ?.slice(0, 4) //////////////////// Have to add some filter by collection id
                   .map((item: IMarketplaceListing, key: number) => (
                     <PredictionCard
