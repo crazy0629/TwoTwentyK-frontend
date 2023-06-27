@@ -30,8 +30,10 @@ import { headerData } from "./data";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppHeaderMenuItemProps } from "../../types";
 import { Notification } from "./Notification";
+import { useMyInfoContext } from "../../context";
 
 export const Header: React.FC = () => {
+  const { myInfoContext } = useMyInfoContext();
   const navigate = useNavigate();
   const location = useLocation();
   const [notification, setNotification] = useState(false);
@@ -43,6 +45,19 @@ export const Header: React.FC = () => {
   );
   const [currentPath, setCurrentPath] = useState<AppHeaderMenuItemProps>();
   const [currentUser, setCurrentUser] = useState<string | null>("");
+
+  const [data, setData] = useState<any>({
+    username: "Moulee",
+    balance: 0,
+  });
+
+  useEffect(() => {
+    if (myInfoContext)
+      setData((prev: any) => ({
+        username: myInfoContext?.username,
+        balance: myInfoContext?.balance ? myInfoContext?.balance : 0,
+      }));
+  }, [myInfoContext]);
 
   useEffect(() => {
     setCurrentUser(localStorage.getItem("auth"));
@@ -94,7 +109,13 @@ export const Header: React.FC = () => {
               <HeaderButtonGroup>
                 <HeaderButton width={124} onClick={handleWithdrawClick}>
                   <IconCoins />
-                  <span>$1,325.00</span>
+                  <span>
+                    $
+                    {data.balance.toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </span>
                 </HeaderButton>
                 <HeaderButton
                   width={124}
@@ -102,7 +123,7 @@ export const Header: React.FC = () => {
                   onClick={() => navigate("/profile/")}
                 >
                   <IconProfile />
-                  <span>Username</span>
+                  <span>{data.username}</span>
                 </HeaderButton>
                 <NotificationButtonWrapper>
                   <HeaderButton onClick={() => setNotification(true)}>

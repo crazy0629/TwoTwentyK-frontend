@@ -32,8 +32,8 @@ export const ProfileSection: React.FC = () => {
     if (myInfoContext)
       setData((prev: any) => ({
         username: myInfoContext?.username,
-        name: prev.name,
-        phone: prev.phone,
+        name: myInfoContext?.name ? myInfoContext?.name : "",
+        phone: myInfoContext?.phone_number ? myInfoContext?.phone_number : "",
         email: myInfoContext?.email,
         password: myInfoContext?.password,
       }));

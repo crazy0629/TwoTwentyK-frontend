@@ -15,8 +15,7 @@ export const CraftSection: React.FC<{
   selectedCards: {
     crafting: number | string | null;
     year: number | string | null;
-    day: number | string | null;
-    month: number | string | null;
+    dayMonth: number | string | null;
     category: number | string | null;
     identity: number | string | null;
     trigger: number | string | null;

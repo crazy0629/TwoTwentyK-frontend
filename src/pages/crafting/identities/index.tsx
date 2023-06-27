@@ -25,16 +25,14 @@ export const CraftingIdentitesPage: React.FC = () => {
   const [selectedCards, setSelectedCards] = useState<{
     crafting: number | string | null;
     year: number | string | null;
-    day: number | string | null;
-    month: number | string | null;
+    dayMonth: number | string | null;
     category: number | string | null;
     identity: number | string | null;
     trigger: number | string | null;
   }>({
     crafting: -1,
     category: -1,
-    day: -1,
-    month: -1,
+    dayMonth: -1,
     year: -1,
     identity: -1,
     trigger: -1,
@@ -68,9 +66,9 @@ export const CraftingIdentitesPage: React.FC = () => {
 
   const craftIdentity = async () => {
     const newCraft = {
-      nft_day_id: Number(selectedCards.day),
-      nft_month_id: Number(selectedCards.month),
-      nft_year_id: Number(selectedCards.year),
+      nft_card_day_month_id: Number(selectedCards.dayMonth),
+      nft_card_year_id: Number(selectedCards.year),
+      nft_card_crafting_id: Number(selectedCards.crafting),
       celebrity_id: Number(selectedCards.crafting),
     };
     const res = await craftingIdentity(newCraft);

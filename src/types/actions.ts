@@ -20,15 +20,16 @@ export type MarketplaceListObjectParams = {
 };
 
 export type IdentityCraftingParams = {
-  nft_day_id: number | string;
-  nft_month_id: number | string;
-  nft_year_id: number | string;
+  nft_card_day_month_id: number | string;
+  nft_card_crafting_id: number | string;
+  nft_card_year_id: number | string;
   celebrity_id: number | string;
 };
 
 export type PredictionCraftingParams = {
-  nft_identity_id: number | string;
-  nft_trigger_id: number | string;
+  nft_card_identity_id: number | string;
+  nft_card_trigger_ids: Array<number | string>;
+  nft_card_crafting_id: number | string;
 };
 
 /////////////////////////////////////

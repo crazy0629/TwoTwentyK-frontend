@@ -12,7 +12,7 @@ export const getFeed = async () => {
 
 export const getPersonalizedFeed = async () => {
   try {
-    const res = await api.get("/feed/personalised");
+    const res = await api.get<IArticle[]>("/feed/personalised");
     return { success: true, data: res.data };
   } catch (error) {
     return { success: false, message: "Server Error!" };

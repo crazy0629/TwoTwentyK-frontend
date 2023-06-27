@@ -85,13 +85,11 @@ export const AppWrapper: React.FC<React.HTMLAttributes<HTMLElement>> = ({
         isAuthenticated: true,
         user: localStorage.getItem("auth"),
       });
-      const myinfo = await getMyInfo();
+      const myinfo = await getMyInfo(token);
       if (myinfo.data) setMyInfoContext(myinfo.data);
       const allFeedData = await getFeed();
-      console.log(allFeedData);
       if (allFeedData.data) setFeedContext(allFeedData.data);
       const myFeedData = await getPersonalizedFeed();
-      console.log(myFeedData);
       if (myFeedData.data) setFeedContext(myFeedData.data);
       const myNFTsData = await getMyNFTs();
       if (myNFTsData.data) setMyNFTsContext(myNFTsData.data);

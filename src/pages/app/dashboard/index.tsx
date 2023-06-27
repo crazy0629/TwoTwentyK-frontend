@@ -40,7 +40,7 @@ export const DashboardPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (feedContext?.length > 0) setPageAllFeeds(feedContext.slice(0, 5));
+    setPageAllFeeds(feedContext.slice(0, 5));
   }, [feedContext]);
 
   useEffect(() => {

@@ -23,9 +23,13 @@ export const register = async ({
   }
 };
 
-export const getMyInfo = async () => {
+export const getMyInfo = async (token: string) => {
   try {
-    const res = await api.get("/me");
+    const res = await api.get("/me", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
     return { success: true, data: res.data };
   } catch (error) {
     return { success: false, message: "Server Error!" };
