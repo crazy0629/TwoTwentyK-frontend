@@ -25,7 +25,16 @@ export const register = async ({
 
 export const getMyInfo = async () => {
   try {
-    const res = await api.get("/auth/login");
+    const res = await api.get("/me");
+    return { success: true, data: res.data };
+  } catch (error) {
+    return { success: false, message: "Server Error!" };
+  }
+};
+
+export const updateMyInfo = async () => {
+  try {
+    const res = await api.put("/me");
     return { success: true, data: res.data };
   } catch (error) {
     return { success: false, message: "Server Error!" };

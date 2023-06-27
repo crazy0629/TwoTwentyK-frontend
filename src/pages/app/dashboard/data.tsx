@@ -77,31 +77,36 @@ export const identitiesData = [
 export const feedData = [
   {
     image: "/assets/feed.png",
-    title: "Event Name",
-    desc: "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
+    title:
+      "Event NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent NameEvent Name",
+    excerpt:
+      "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
     tags: ["#tombrady"],
-    date: "February 26 (10:30am)",
+    created_at: "February 26 (10:30am)",
   },
   {
     image: "/assets/feed.png",
     title: "Event Name",
-    desc: "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
+    excerpt:
+      "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
     tags: ["#tombrady"],
-    date: "February 26 (10:30am)",
+    created_at: "February 26 (10:30am)",
   },
   {
     image: "/assets/feed.png",
     title: "Event Name",
-    desc: "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
+    excerpt:
+      "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
     tags: ["#tombrady"],
-    date: "February 26 (10:30am)",
+    created_at: "February 26 (10:30am)",
   },
   {
     image: "/assets/feed.png",
     title: "Event Name",
-    desc: "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
+    excerpt:
+      "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
     tags: ["#tombrady"],
-    date: "February 26 (10:30am)",
+    created_at: "February 26 (10:30am)",
   },
 ];
 
@@ -109,28 +114,32 @@ export const newFeedData = [
   {
     image: "/assets/feed.png",
     title: "Event Name",
-    desc: "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
+    excerpt:
+      "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
     tags: ["#tombrady"],
     date: "February 26 (10:30am)",
   },
   {
     image: "/assets/feed.png",
     title: "Event Name",
-    desc: "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
+    excerpt:
+      "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
     tags: ["#tombrady"],
     date: "February 26 (10:30am)",
   },
   {
     image: "/assets/feed.png",
     title: "Event Name",
-    desc: "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
+    excerpt:
+      "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
     tags: ["#tombrady"],
     date: "February 26 (10:30am)",
   },
   {
     image: "/assets/feed.png",
     title: "Event Name",
-    desc: "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
+    excerpt:
+      "Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.Event description. Amet minim mollit non deserunt est ullamco sit aliqua dolor do amet.",
     tags: ["#tombrady"],
     date: "February 26 (10:30am)",
   },

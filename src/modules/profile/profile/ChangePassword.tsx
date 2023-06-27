@@ -6,9 +6,10 @@ import { resetPassFormValidation } from "../../../utils";
 
 export const ChangePassword: React.FC<{
   password: string;
+  section: string;
   onFinish: (newPassword: string) => void;
   onBack: () => void;
-}> = ({ password, onFinish, onBack }) => {
+}> = ({ password, onFinish, onBack, section }) => {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState({
     cPassword: "",
@@ -50,7 +51,7 @@ export const ChangePassword: React.FC<{
   };
 
   return (
-    <ProfileEditContainer onBack={onBack}>
+    <ProfileEditContainer onBack={onBack} section={section}>
       {step === 0 && (
         <>
           <Input

@@ -47,7 +47,7 @@ export const IdentitiesPage: React.FC = () => {
   };
 
   const handleCraft = (id: string | number) => {
-    navigate("/crafting/identities");
+    navigate("/crafting/identities?id=" + id);
   };
 
   const handleSell = (id: string | number) => {

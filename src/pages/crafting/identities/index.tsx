@@ -8,13 +8,15 @@ import {
   SelectCardSection,
 } from "../../../modules";
 import { Button } from "../../../components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { craftingIdentity, getMyNFTs } from "../../../actions";
 import { ToastContainer, toast } from "react-toastify";
 import { useMyNFTsContext } from "../../../context";
 
 export const CraftingIdentitesPage: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
   const { setMyNFTsContext } = useMyNFTsContext();
   const [currentUser, setCurrentUser] = useState<string | null>("");
   const [selectedCraft, setSelectedCraft] = useState("crafting");
@@ -41,6 +43,12 @@ export const CraftingIdentitesPage: React.FC = () => {
   useEffect(() => {
     setCurrentUser(localStorage.getItem("auth"));
   }, []);
+
+  useEffect(() => {
+    if (params.get("id")) {
+      setClickedCard(params.get("id"));
+    }
+  }, [params]);
 
   const handleCardClick = (key: string | number | null) => {
     if (key === clickedCard) {

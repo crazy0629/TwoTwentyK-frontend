@@ -4,9 +4,10 @@ import { Button, Input } from "../../../components";
 
 export const ChangePhoneNumber: React.FC<{
   onBack: () => void;
+  section: string;
   onFinish: (phone: string) => void;
   phone: string;
-}> = ({ onBack, onFinish, phone }) => {
+}> = ({ onBack, onFinish, phone, section }) => {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState({
     nPhone: phone,
@@ -41,7 +42,7 @@ export const ChangePhoneNumber: React.FC<{
     }
   };
   return (
-    <ProfileEditContainer onBack={onBack}>
+    <ProfileEditContainer onBack={onBack} section={section}>
       {step === 0 && (
         <>
           <Input

@@ -11,13 +11,15 @@ import {
   MatchListSection,
   SelectCardSection,
 } from "../../../modules";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../../../components";
 import { ToastContainer, toast } from "react-toastify";
 import { craftingPrediction, getMyNFTs } from "../../../actions";
 import { useMyNFTsContext } from "../../../context";
 
 export const CraftingPredictionsPage: React.FC = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
   const navigate = useNavigate();
   const { setMyNFTsContext } = useMyNFTsContext();
   const [currentUser, setCurrentUser] = useState<string | null>("");
@@ -45,6 +47,12 @@ export const CraftingPredictionsPage: React.FC = () => {
   useEffect(() => {
     setCurrentUser(localStorage.getItem("auth"));
   }, []);
+
+  useEffect(() => {
+    if (params.get("id")) {
+      setClickedCard(params.get("id"));
+    }
+  }, [params]);
 
   const handleCardClick = (key: string | number | null) => {
     if (key === clickedCard) {

@@ -4,10 +4,11 @@ import { Button, Input } from "../../../components";
 
 export const ChangeUsername: React.FC<{
   username: string;
+  section: string;
   label: string;
   onFinish: (newUsername: string) => void;
   onBack: () => void;
-}> = ({ onBack, onFinish, username, label }) => {
+}> = ({ onBack, onFinish, username, label, section }) => {
   const [input, setInput] = useState(username);
   const [error, setError] = useState("");
 
@@ -24,7 +25,7 @@ export const ChangeUsername: React.FC<{
   };
 
   return (
-    <ProfileEditContainer onBack={onBack}>
+    <ProfileEditContainer onBack={onBack} section={section}>
       <Input
         label={label}
         onChange={handleChange}

@@ -47,7 +47,7 @@ export const PredictionsPage: React.FC = () => {
   };
 
   const handleCraft = (id: string | number) => {
-    navigate("/crafting/predictions");
+    navigate("/crafting/predictions?id=" + id);
   };
 
   const handleSell = (id: string | number) => {

@@ -9,7 +9,7 @@ export const AppLayoutWrapper = styled.div`
 
 export const HeaderWrapper = styled.div`
   position: fixed;
-  width: 100%;
+  width: 100vw;
   z-index: 10;
   backdrop-filter: blur(5px);
   top: 0;

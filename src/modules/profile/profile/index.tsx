@@ -90,6 +90,7 @@ export const ProfileSection: React.FC = () => {
       {status === "username" && (
         <ChangeUsername
           onBack={handleBack}
+          section="Edit Username"
           label="Enter New Username"
           onFinish={handleChangeUsername}
           username={data.username}
@@ -98,6 +99,7 @@ export const ProfileSection: React.FC = () => {
       {status === "name" && (
         <ChangeUsername
           onBack={handleBack}
+          section="Add Name"
           label="Enter Name"
           onFinish={handleChangeName}
           username={data.name}
@@ -105,6 +107,7 @@ export const ProfileSection: React.FC = () => {
       )}
       {status === "phone" && (
         <ChangePhoneNumber
+          section="Change Phone Number"
           onBack={handleBack}
           onFinish={handleChangePhone}
           phone={data.phone}
@@ -112,6 +115,7 @@ export const ProfileSection: React.FC = () => {
       )}
       {status === "password" && (
         <ChangePassword
+          section="Change Password"
           onBack={handleBack}
           onFinish={handleChangePassword}
           password={data.password}
@@ -129,11 +133,12 @@ export const ProfileSection: React.FC = () => {
 
 export const ProfileEditContainer: React.FC<ProfileEditProps> = ({
   onBack,
+  section,
   children,
 }) => {
   return (
     <ProfileEditWrapper>
-      <BackProfile onClick={onBack}>{"< Change Password"}</BackProfile>
+      <BackProfile onClick={onBack}>{"< " + section}</BackProfile>
       <ProfileEditContent>{children}</ProfileEditContent>
     </ProfileEditWrapper>
   );

@@ -28,10 +28,17 @@ export const FeedInfoWrapper = styled.div`
   position: relative;
   flex: 1;
   h3 {
+    cursor: pointer;
     font-weight: 600;
     font-size: 16px;
     line-height: 19px;
     margin-bottom: 3px;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
   p {
     font-weight: 400;

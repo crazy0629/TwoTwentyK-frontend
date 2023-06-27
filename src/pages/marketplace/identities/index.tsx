@@ -40,13 +40,14 @@ export const MarketplaceIdentitiesPage: React.FC = () => {
           </MarketplacePageContainer>
         ) : (
           <EmptyCards>
-            <h3>No List</h3>
-            <p>It looks like there is no card list to open.  </p>
+            <p style={{ maxWidth: "253px" }}>
+              Wow, can you believe no one wants to sell even a single card?
+            </p>
             <Button
               className="buy-button"
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/marketplace")}
             >
-              Go to Dashboard
+              Sell Card
             </Button>
           </EmptyCards>
         )}

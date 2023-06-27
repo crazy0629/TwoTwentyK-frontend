@@ -169,6 +169,7 @@ export type ProfileItemProps = {
 
 export type ProfileEditProps = {
   onBack: () => void;
+  section: string;
 } & React.HTMLAttributes<HTMLElement>;
 
 export type NotifyProps = {
