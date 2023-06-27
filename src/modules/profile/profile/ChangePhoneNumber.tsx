@@ -39,7 +39,7 @@ export const ChangePhoneNumber: React.FC<{
       if (form.code === "") {
         setError((prev) => ({ ...prev, code: "Enter your code." }));
       } else {
-        const res = await updateMyInfo({ phonenumber: form.nPhone });
+        const res = await updateMyInfo({ phone_number: form.nPhone });
         if (res.success) {
           onFinish(form.nPhone);
         } else {
