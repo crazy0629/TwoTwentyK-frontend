@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ProfileEditContainer } from ".";
 import { Button, Input } from "../../../components";
+import { updateMyInfo } from "../../../actions";
+import { ToastContainer, toast } from "react-toastify";
 
 export const ChangePhoneNumber: React.FC<{
   onBack: () => void;
@@ -23,7 +25,7 @@ export const ChangePhoneNumber: React.FC<{
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (step === 0) {
       if (form.nPhone === "") {
         setError((prev) => ({ ...prev, nPhone: "This field is required" }));
@@ -37,12 +39,29 @@ export const ChangePhoneNumber: React.FC<{
       if (form.code === "") {
         setError((prev) => ({ ...prev, code: "Enter your code." }));
       } else {
-        onFinish(form.nPhone);
+        const res = await updateMyInfo({ phonenumber: form.nPhone });
+        if (res.success) {
+          onFinish(form.nPhone);
+        } else {
+          toast.error(res.message);
+        }
       }
     }
   };
   return (
     <ProfileEditContainer onBack={onBack} section={section}>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       {step === 0 && (
         <>
           <Input

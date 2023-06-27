@@ -32,9 +32,9 @@ export const getMyInfo = async () => {
   }
 };
 
-export const updateMyInfo = async () => {
+export const updateMyInfo = async (arg: { [key: string]: string }) => {
   try {
-    const res = await api.put("/me");
+    const res = await api.put("/me", { ...arg });
     return { success: true, data: res.data };
   } catch (error) {
     return { success: false, message: "Server Error!" };

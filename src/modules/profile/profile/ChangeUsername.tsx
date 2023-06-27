@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ProfileEditContainer } from ".";
 import { Button, Input } from "../../../components";
+import { updateMyInfo } from "../../../actions";
+import { ToastContainer, toast } from "react-toastify";
 
 export const ChangeUsername: React.FC<{
   username: string;
@@ -16,16 +18,35 @@ export const ChangeUsername: React.FC<{
     setInput(e.target.value);
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (input === "") {
       setError("This field is Required!");
     } else {
-      onFinish(input);
+      const res = await updateMyInfo(
+        section === "Add Name" ? { name: input } : { username: input }
+      );
+      if (res.success) {
+        onFinish(input);
+      } else {
+        toast.error(res.message);
+      }
     }
   };
 
   return (
     <ProfileEditContainer onBack={onBack} section={section}>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Input
         label={label}
         onChange={handleChange}

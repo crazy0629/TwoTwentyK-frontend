@@ -3,6 +3,8 @@ import { Button, Input } from "../../../components";
 import { ProfileEditContainer } from ".";
 import { InputGroup } from "./styles";
 import { resetPassFormValidation } from "../../../utils";
+import { updateMyInfo } from "../../../actions";
+import { ToastContainer, toast } from "react-toastify";
 
 export const ChangePassword: React.FC<{
   password: string;
@@ -22,7 +24,7 @@ export const ChangePassword: React.FC<{
     rPassword: "",
   });
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (step === 0) {
       if (password === form.cPassword) {
         setStep((prev) => prev + 1);
@@ -40,8 +42,12 @@ export const ChangePassword: React.FC<{
         nPassword: errors.password,
       }));
       if (isValid) {
-        setStep(0);
-        onFinish(form.nPassword);
+        const res = await updateMyInfo({ password: form.nPassword });
+        if (res.success) {
+          onFinish(form.nPassword);
+        } else {
+          toast.error(res.message);
+        }
       }
     }
   };
@@ -52,6 +58,18 @@ export const ChangePassword: React.FC<{
 
   return (
     <ProfileEditContainer onBack={onBack} section={section}>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       {step === 0 && (
         <>
           <Input
