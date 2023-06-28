@@ -90,7 +90,7 @@ export const AppWrapper: React.FC<React.HTMLAttributes<HTMLElement>> = ({
       const allFeedData = await getFeed();
       if (allFeedData.data) setFeedContext(allFeedData.data);
       const myFeedData = await getPersonalizedFeed();
-      if (myFeedData.data) setFeedContext(myFeedData.data);
+      if (myFeedData.data) setMyFeedContext(myFeedData.data);
       const myNFTsData = await getMyNFTs();
       if (myNFTsData.data) setMyNFTsContext(myNFTsData.data);
       const marketplaceListingData = await getMarketplaceList();
