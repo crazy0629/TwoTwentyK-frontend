@@ -17,45 +17,63 @@ export const CardGridSection: React.FC<DateCardGridProps> = ({
   const { marketplaceListContext } = useMarketplaceListContext();
   return (
     <CardGridWrapper>
-      {data &&
-        marketplaceListContext?.map(
+      {(cardType === "category" || cardType === "date") &&
+        data?.map((item, key) => (
+          <DateCard
+            // {...data[key]}
+            key={key}
+            {...item}
+            onCraft={onCraft}
+            onView={onView}
+            onSell={onSell}
+          />
+        ))}
+      {cardType === "trigger" &&
+        data?.map((item, key) => (
+          <TriggerCard
+            key={key}
+            {...item}
+            onCraft={onCraft}
+            onView={onView}
+            onSell={onSell}
+          />
+        ))}
+      {/* {data &&
+        data?.map(
           ///////// add some filter
-          (item: IMarketplaceListing, key: number) =>
+          (item, key: number) =>
             cardType === "trigger" ? (
               <TriggerCard
                 key={key}
-                {...data[key]}
+                // {...data[key]}
                 {...item}
-                onCraft={() => (onCraft ? onCraft("id") : {})}
-                onView={() => (onView ? onView("id") : {})}
-                onSell={() => (onSell ? onSell("id") : {})}
+                onCraft={onCraft}
+                onView={onView}
+                onSell={onSell}
               />
             ) : (
               <DateCard
-                {...data[key]}
+                // {...data[key]}
                 key={key}
                 {...item}
-                onCraft={() => (onCraft ? onCraft("id") : {})}
-                onView={() => (onView ? onView("id") : {})}
-                onSell={() => (onSell ? onSell("id") : {})}
+                onCraft={onCraft}
+                onView={onView}
+                onSell={onSell}
               />
             )
-        )}
+        )} */}
       {identityData &&
-        marketplaceListContext?.map(
-          (item: IMarketplaceListing, key: number) => (
-            <PredictionCard
-              {...identityData[key]}
-              height={293}
-              isNotHover={true}
-              key={key}
-              {...item}
-              onCraft={() => (onCraft ? onCraft("id") : {})}
-              onView={() => (onView ? onView("id") : {})}
-              onSell={() => (onSell ? onSell("id") : {})}
-            />
-          )
-        )}
+        identityData?.map((item, key) => (
+          <PredictionCard
+            height={293}
+            isNotHover={true}
+            key={key}
+            {...item}
+            // onCraft={onCraft}
+            onView={onView}
+            onSell={onSell}
+          />
+        ))}
     </CardGridWrapper>
   );
 };

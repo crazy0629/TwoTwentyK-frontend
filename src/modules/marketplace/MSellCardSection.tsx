@@ -61,18 +61,17 @@ export const MSellCardSection: React.FC<CardSidebarProps> = ({
               <PredictionCard
                 icon={<IconCardAthlete />}
                 iconText="Athlete"
-                name=""
-                type="Rare"
+                category=""
+                rarity={2}
                 height={298}
               />
             )}
             {page === "predictions" && (
               <PredictionCard
                 image="/assets/nfts/2.png"
-                name="Tom Brady"
-                type="Rare"
+                category="Tom Brady"
+                rarity={2}
                 height={298}
-                amount={3}
               />
             )}
           </ViewCardWrapper>

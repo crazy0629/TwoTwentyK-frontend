@@ -47,7 +47,7 @@ export const IdentitiesPage: React.FC = () => {
   };
 
   const handleCraft = (id: string | number) => {
-    navigate("/crafting/identities?id=" + id);
+    navigate("/crafting/predictions?id=" + id);
   };
 
   const handleSell = (id: string | number) => {
@@ -58,7 +58,7 @@ export const IdentitiesPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        myNFTsContext?.nft_card_identity?.length > 0 ? (
+        myNFTsContext?.nft_card_identity_data?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
@@ -74,7 +74,7 @@ export const IdentitiesPage: React.FC = () => {
               </DatePageTitleWrapper>
               <FilterSection />
               <CardGridSection
-                identityData={myNFTsContext?.nft_card_identity}
+                identityData={myNFTsContext?.nft_card_identity_data}
                 onCraft={handleCraft}
                 onSell={handleSell}
                 cardType="identity"
@@ -84,14 +84,20 @@ export const IdentitiesPage: React.FC = () => {
                 isView={isView === "view"}
                 cardType="identity"
                 id={"asdfa"}
-                onClose={() => setIsView("")}
+                onClose={() => {
+                  setIsView("");
+                  navigate("/dashboard/identities");
+                }}
               />
               <SellDateCardSection
                 onSellConfirm={handleSellConfirm}
                 cardType="identity"
                 isView={isView === "sell"}
                 id={"asdfa"}
-                onClose={() => setIsView("")}
+                onClose={() => {
+                  setIsView("");
+                  navigate("/dashboard/identities");
+                }}
               />
             </DatePageContainer>
           </DatesPageWrapper>

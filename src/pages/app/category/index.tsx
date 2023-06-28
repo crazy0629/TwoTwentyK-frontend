@@ -26,6 +26,10 @@ export const CategoriesPage: React.FC = () => {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
+    console.log(myNFTsContext);
+  }, [myNFTsContext]);
+
+  useEffect(() => {
     setCurrentUser(localStorage.getItem("auth"));
   }, []);
 
@@ -50,7 +54,7 @@ export const CategoriesPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        myNFTsContext?.nft_card_category?.length > 0 ? (
+        myNFTsContext?.nft_card_category_data?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
@@ -67,7 +71,8 @@ export const CategoriesPage: React.FC = () => {
               </DatePageTitleWrapper>
               <FilterSection />
               <CardGridSection
-                data={myNFTsContext?.nft_card_category}
+                cardType="category"
+                data={myNFTsContext?.nft_card_category_data}
                 onCraft={handleCraft}
                 onSell={handleSell}
                 onView={handleView}
@@ -87,7 +92,7 @@ export const CategoriesPage: React.FC = () => {
           </DatesPageWrapper>
         ) : (
           <EmptyCards>
-            <h3>No Date Cards</h3>
+            <h3>No Category Cards</h3>
             <p>It looks like you don’t have any category cards yet.  </p>
             <Button
               className="buy-button"

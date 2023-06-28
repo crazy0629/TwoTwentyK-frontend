@@ -18,8 +18,12 @@ import { IconUserAdd } from "../Icons";
 
 export const DateCard: React.FC<DateCardProps> = ({
   image,
-  name,
-  type,
+  category,
+  id = 0,
+  is_crafted,
+  owner_id,
+  rarity,
+
   isNotHover,
   onCraft,
   onSell,
@@ -29,9 +33,11 @@ export const DateCard: React.FC<DateCardProps> = ({
     <DateCardWrapper bg={image} isnothover={isNotHover ? "true" : undefined}>
       <CardTopWrapper>
         <div></div>
-        <CardTypeWrapper>{type}</CardTypeWrapper>
+        {rarity === 0 && <CardTypeWrapper>Common</CardTypeWrapper>}
+        {rarity === 1 && <CardTypeWrapper>Uncommon</CardTypeWrapper>}
+        {rarity === 2 && <CardTypeWrapper>Rare</CardTypeWrapper>}
       </CardTopWrapper>
-      <CardBottomWrapper>{name}</CardBottomWrapper>
+      <CardBottomWrapper>{category}</CardBottomWrapper>
       <CardOverlayWrapper className="overlay">
         <CardButtonGroup>
           <CardTooltip>
@@ -56,9 +62,11 @@ export const DateCard: React.FC<DateCardProps> = ({
               </div>
             </TooltipContent>
           </CardTooltip>
-          <CardButton onClick={onView}>View</CardButton>
-          <CardButton onClick={onCraft}>Craft Identity</CardButton>
-          <CardButton onClick={onSell}>Sell</CardButton>
+          {onView && <CardButton onClick={() => onView(id)}>View</CardButton>}
+          {!is_crafted && onCraft && (
+            <CardButton onClick={() => onCraft(id)}>Craft Identity</CardButton>
+          )}
+          {onSell && <CardButton onClick={() => onSell(id)}>Sell</CardButton>}
         </CardButtonGroup>
       </CardOverlayWrapper>
     </DateCardWrapper>

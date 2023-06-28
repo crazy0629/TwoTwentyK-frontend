@@ -1,5 +1,5 @@
 import React from "react";
-import { DateCardProps } from "../../types";
+import { TriggerCardProps } from "../../types";
 import {
   CardButton,
   CardButtonGroup,
@@ -14,10 +14,13 @@ import {
 } from "../PredictionCard/styles";
 import { IconBag } from "../Icons";
 
-export const TriggerCard: React.FC<DateCardProps> = ({
+export const TriggerCard: React.FC<TriggerCardProps> = ({
   image,
-  name,
-  type,
+  id = 0,
+  is_crafted,
+  owner_id,
+  rarity,
+  trigger,
   isNotHover,
   onCraft,
   onSell,
@@ -26,18 +29,24 @@ export const TriggerCard: React.FC<DateCardProps> = ({
   return (
     <DateCardWrapper bg={image} isnothover={isNotHover ? "true" : undefined}>
       <CardTopWrapper>
-        <div className="trigger">Minor 2</div>
-        <CardTypeWrapper>{type}</CardTypeWrapper>
+        <div className="trigger">{"Minor 2"}</div>
+        {rarity === 0 && <CardTypeWrapper>Common</CardTypeWrapper>}
+        {rarity === 1 && <CardTypeWrapper>Uncommon</CardTypeWrapper>}
+        {rarity === 2 && <CardTypeWrapper>Rare</CardTypeWrapper>}
       </CardTopWrapper>
-      <CardBottomWrapper>{name}</CardBottomWrapper>
+      <CardBottomWrapper>{trigger}</CardBottomWrapper>
       <CardOverlayWrapper className="overlay">
         <CardButtonGroup>
           <CardTooltip className="left">
             <IconBag />
           </CardTooltip>
-          <CardButton onClick={onView}>View</CardButton>
-          <CardButton onClick={onCraft}>Craft Prediction</CardButton>
-          <CardButton onClick={onSell}>Sell</CardButton>
+          {onView && <CardButton onClick={() => onView(id)}>View</CardButton>}
+          {!is_crafted && onCraft && (
+            <CardButton onClick={() => onCraft(id)}>
+              Craft Prediction
+            </CardButton>
+          )}
+          {onSell && <CardButton onClick={() => onSell(id)}>Sell</CardButton>}
         </CardButtonGroup>
       </CardOverlayWrapper>
     </DateCardWrapper>

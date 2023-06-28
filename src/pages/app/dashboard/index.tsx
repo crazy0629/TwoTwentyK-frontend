@@ -78,14 +78,13 @@ export const DashboardPage: React.FC = () => {
       <DashboardPageWrapper>
         <DashboardCardWrapper>
           <CardTitle>My Identities</CardTitle>
-          {myNFTsContext?.nft_card_identity?.length > 0 && currentUser ? (
+          {myNFTsContext?.nft_card_identity_data?.length > 0 && currentUser ? (
             <React.Fragment>
               <DashboardCardGrid>
-                {myNFTsContext?.nft_card_identity
+                {myNFTsContext?.nft_card_identity_data
                   ?.slice(0, 4) //////////////////// Have to add some filter by collection id
-                  .map((item: IMarketplaceListing, key: number) => (
+                  .map((item: any, key: number) => (
                     <PredictionCard
-                      {...identitiesData[key]}
                       {...item}
                       onClick={() =>
                         navigate("/dashboard/identities?id=" + item.nft_id)
@@ -118,17 +117,16 @@ export const DashboardPage: React.FC = () => {
         </DashboardCardWrapper>
         <DashboardCardWrapper>
           <CardTitle>My Predictions</CardTitle>
-          {myNFTsContext?.nft_card_prediction.length > 0 && currentUser ? (
+          {myNFTsContext?.nft_card_prediction_data.length > 0 && currentUser ? (
             <React.Fragment>
               <DashboardCardGrid>
-                {myNFTsContext?.nft_card_prediction
+                {myNFTsContext?.nft_card_prediction_data
                   ?.slice(0, 4) //////////////////// Have to add some filter by collection id
-                  .map((item: IMarketplaceListing, key: number) => (
+                  .map((item: any, key: number) => (
                     <PredictionCard
                       onClick={() =>
                         navigate("/dashboard/predictions?id=" + item.nft_id)
                       }
-                      {...predictionData[key]}
                       {...item}
                       key={key}
                     />

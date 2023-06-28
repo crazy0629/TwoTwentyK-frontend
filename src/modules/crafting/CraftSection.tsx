@@ -10,6 +10,14 @@ import {
 } from "./styles";
 import { Button } from "../../components";
 import { identityCraft, predictionCraft } from "./data";
+import {
+  nft_card_category_data,
+  nft_card_crafting_data,
+  nft_card_day_month_data,
+  nft_card_identity_data,
+  nft_card_trigger_data,
+  nft_card_year_data,
+} from "../../data/nfts";
 
 export const CraftSection: React.FC<{
   page: "identity" | "prediction";
@@ -28,7 +36,108 @@ export const CraftSection: React.FC<{
 }> = ({ page, onCraftChanged, selectedCraft, selectedCards, onCraft }) => {
   const [isAdd, setIsAdd] = useState(false);
 
+  type CardProps = {
+    id: number;
+    rarity: number;
+    image: string;
+    name: string | number;
+  }[];
+
+  type NFTData = {
+    crafting: CardProps;
+    dayMonth: CardProps;
+    year: CardProps;
+    category: CardProps;
+    identity: CardProps;
+    trigger: CardProps;
+  } & any;
+
+  const [nftData, setNftData] = useState<NFTData>({
+    crafting: [],
+    dayMonth: [],
+    year: [],
+    category: [],
+    identity: [],
+    trigger: [],
+  });
+
   useEffect(() => {
+    let tempData: NFTData = {
+      category: [],
+      crafting: [],
+      dayMonth: [],
+      year: [],
+      identity: [],
+      trigger: [],
+    };
+    // if (selectedCraft === "crafting") {
+    tempData.crafting = nft_card_crafting_data
+      .filter((f) => !f.is_crafted)
+      .map((item) => {
+        return {
+          id: item.id,
+          rarity: item.rarity,
+          image: item.image,
+          name: "Crafting",
+        };
+      });
+    // } else if (selectedCraft === "dayMonth") {
+    tempData.dayMonth = nft_card_day_month_data
+      .filter((f) => !f.is_crafted)
+      .map((item) => {
+        return {
+          id: item.id,
+          rarity: item.rarity,
+          image: item.image,
+          name: item.day + "/" + item.month,
+        };
+      });
+    // } else if (selectedCraft === "year") {
+    tempData.year = nft_card_year_data
+      .filter((f) => !f.is_crafted)
+      .map((item) => {
+        return {
+          id: item.id,
+          rarity: item.rarity,
+          image: item.image,
+          name: item.year,
+        };
+      });
+    // } else if (selectedCraft === "category") {
+    tempData.category = nft_card_category_data
+      .filter((f) => !f.is_crafted)
+      .map((item) => {
+        return {
+          id: item.id,
+          rarity: item.rarity,
+          image: item.image,
+          name: item.category,
+        };
+      });
+    // } else if (selectedCraft === "identity") {
+    tempData.identity = nft_card_identity_data
+      .filter((f) => !f.is_crafted)
+      .map((item) => {
+        return {
+          id: item.id,
+          rarity: item.rarity,
+          image: item.image,
+          name: item.category,
+        };
+      });
+    // } else if (selectedCraft === "trigger") {
+    tempData.trigger = nft_card_trigger_data
+      .filter((f) => !f.is_crafted)
+      .map((item) => {
+        return {
+          id: item.id,
+          rarity: item.rarity,
+          image: item.image,
+          name: item.trigger,
+        };
+      });
+    // }
+    setNftData(tempData);
     setIsAdd(false);
   }, [selectedCards]);
 
@@ -82,9 +191,30 @@ export const CraftSection: React.FC<{
             <CraftCardWrapper key={key}>
               <h6>{item.title}</h6>
               {Number(selectedCards[item.key]) > -1 ? (
-                <CraftCard bg={"/assets/nfts/1.png"} className="crafting-card">
-                  <span>Rare</span>
-                  <p>{item.title}</p>
+                <CraftCard
+                  bg={
+                    nftData[item.key].filter(
+                      (f: any) => f.id === Number(selectedCards[item.key])
+                    )[0]?.image
+                  }
+                  className="crafting-card"
+                >
+                  {nftData[item.key].filter(
+                    (f: any) => f.id === Number(selectedCards[item.key])
+                  )[0]?.rarity === 0 && <span>Common</span>}
+                  {nftData[item.key].filter(
+                    (f: any) => f.id === Number(selectedCards[item.key])
+                  )[0]?.rarity === 1 && <span>Uncommon</span>}
+                  {nftData[item.key].filter(
+                    (f: any) => f.id === Number(selectedCards[item.key])
+                  )[0]?.rarity === 2 && <span>Rare</span>}
+                  <p>
+                    {
+                      nftData[item.key].filter(
+                        (f: any) => f.id === Number(selectedCards[item.key])
+                      )[0]?.name
+                    }
+                  </p>
                 </CraftCard>
               ) : (
                 <EmptyCraftCard
@@ -103,11 +233,30 @@ export const CraftSection: React.FC<{
                     <h6>{item.title}</h6>
                     {Number(selectedCards[item.key]) > -1 ? (
                       <CraftCard
-                        bg={"/assets/nfts/1.png"}
+                        bg={
+                          nftData[item.key].filter(
+                            (f: any) => f.id === Number(selectedCards[item.key])
+                          )[0]?.image
+                        }
                         className="crafting-card"
                       >
-                        <span>Rare</span>
-                        <p>{item.title}</p>
+                        {nftData[item.key].filter(
+                          (f: any) => f.id === Number(selectedCards[item.key])
+                        )[0]?.rarity === 0 && <span>Common</span>}
+                        {nftData[item.key].filter(
+                          (f: any) => f.id === Number(selectedCards[item.key])
+                        )[0]?.rarity === 1 && <span>Uncommon</span>}
+                        {nftData[item.key].filter(
+                          (f: any) => f.id === Number(selectedCards[item.key])
+                        )[0]?.rarity === 2 && <span>Rare</span>}
+                        <p>
+                          {
+                            nftData[item.key].filter(
+                              (f: any) =>
+                                f.id === Number(selectedCards[item.key])
+                            )[0]?.name
+                          }
+                        </p>
                       </CraftCard>
                     ) : (
                       <EmptyCraftCard
@@ -125,11 +274,29 @@ export const CraftSection: React.FC<{
                         <CraftCardWrapper key={key}>
                           <h6>{item.title}</h6>
                           <CraftCard
-                            bg={"/assets/nfts/1.png"}
+                            bg={
+                              nftData[item.key].filter(
+                                (f: any) => f.id === tItem
+                              )[0]?.image
+                            }
                             className="crafting-card"
                           >
-                            <span>Rare</span>
-                            <p>{item.title}</p>
+                            {nftData[item.key].filter(
+                              (f: any) => f.id === tItem
+                            )[0]?.rarity === 0 && <span>Common</span>}
+                            {nftData[item.key].filter(
+                              (f: any) => f.id === tItem
+                            )[0]?.rarity === 1 && <span>Uncommon</span>}
+                            {nftData[item.key].filter(
+                              (f: any) => f.id === tItem
+                            )[0]?.rarity === 2 && <span>Rare</span>}
+                            <p>
+                              {
+                                nftData[item.key].filter(
+                                  (f: any) => f.id === tItem
+                                )[0]?.name
+                              }
+                            </p>
                           </CraftCard>
                         </CraftCardWrapper>
                       ))

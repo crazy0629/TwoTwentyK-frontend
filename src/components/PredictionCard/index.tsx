@@ -13,30 +13,21 @@ import {
   CardButtonGroup,
   CardOverlayWrapper,
 } from "../DateCard/styles";
-import { IMarketplaceListing } from "../../types/actions";
 import { PredictionCardProps } from "../../types";
 
-export const PredictionCard: React.FC<
-  IMarketplaceListing & PredictionCardProps
-> = ({
-  created_at,
-  id,
-  is_listed,
-  nft_collection_id,
-  nft_id,
-  owner,
-  owner_id,
-  price,
+export const PredictionCard: React.FC<PredictionCardProps> = ({
   ///////////////////////////////////
+  id = 0,
   image,
-  amount,
-  date,
-  name,
-  type,
-  height,
+  category,
+  day,
+  month,
+  rarity,
   year,
   icon,
   iconText,
+  is_crafted,
+  height,
   isNotHover,
   onClick,
   onCraft,
@@ -53,10 +44,13 @@ export const PredictionCard: React.FC<
     >
       <CardTopWrapper>
         <CardDateWrapper>
-          {date && <div className="date">{date}</div>}
+          {day && <div className="date">{day}</div>}
+          {month && <div className="month">{month}</div>}
           {year && <div className="year">{year}</div>}
         </CardDateWrapper>
-        <CardTypeWrapper>{type}</CardTypeWrapper>
+        {rarity === 0 && <CardTypeWrapper>Common</CardTypeWrapper>}
+        {rarity === 1 && <CardTypeWrapper>Uncommon</CardTypeWrapper>}
+        {rarity === 2 && <CardTypeWrapper>Rare</CardTypeWrapper>}
       </CardTopWrapper>
       {icon && (
         <CardBodyWrapper>
@@ -64,20 +58,22 @@ export const PredictionCard: React.FC<
           <p>{iconText}</p>
         </CardBodyWrapper>
       )}
-      {name && (
+      {category && (
         <CardBottomWrapper>
-          {amount && <AmountWrapper>{amount}</AmountWrapper>}
-          {name}
+          {/* {amount && <AmountWrapper>{amount}</AmountWrapper>} */}
+          {category}
         </CardBottomWrapper>
       )}
       <CardOverlayWrapper className="overlay">
         <CardButtonGroup>
-          {onView && <CardButton onClick={onView}>View</CardButton>}
-          {onCraft && (
-            <CardButton onClick={onCraft}>Craft Prediction</CardButton>
+          {onView && <CardButton onClick={() => onView(id)}>View</CardButton>}
+          {!is_crafted && onCraft && (
+            <CardButton onClick={() => onCraft(id)}>
+              Craft Prediction
+            </CardButton>
           )}
-          {onSell && <CardButton onClick={onSell}>Sell</CardButton>}
-          {onBuy && <CardButton onClick={onBuy}>Buy</CardButton>}
+          {onSell && <CardButton onClick={() => onSell(id)}>Sell</CardButton>}
+          {onBuy && <CardButton onClick={() => onBuy(id)}>Buy</CardButton>}
         </CardButtonGroup>
       </CardOverlayWrapper>
     </PredictionCardWrapper>

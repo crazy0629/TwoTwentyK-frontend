@@ -58,7 +58,7 @@ export const PredictionsPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        myNFTsContext?.nft_card_prediction?.length > 0 ? (
+        myNFTsContext?.nft_card_prediction_data?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
@@ -74,7 +74,7 @@ export const PredictionsPage: React.FC = () => {
               </DatePageTitleWrapper>
               <FilterSection />
               <CardGridSection
-                identityData={myNFTsContext?.nft_card_prediction}
+                identityData={myNFTsContext?.nft_card_prediction_data}
                 onCraft={handleCraft}
                 onSell={handleSell}
                 cardType="identity"
@@ -84,14 +84,20 @@ export const PredictionsPage: React.FC = () => {
                 isView={isView === "view"}
                 cardType="prediction"
                 id={"asdfa"}
-                onClose={() => setIsView("")}
+                onClose={() => {
+                  setIsView("");
+                  navigate("/dashboard/predictions");
+                }}
               />
               <SellDateCardSection
                 onSellConfirm={handleSellConfirm}
                 cardType="prediction"
                 isView={isView === "sell"}
                 id={"asdfa"}
-                onClose={() => setIsView("")}
+                onClose={() => {
+                  setIsView("");
+                  navigate("/dashboard/predictions");
+                }}
               />
             </DatePageContainer>
           </DatesPageWrapper>

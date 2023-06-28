@@ -51,9 +51,7 @@ export const DatesPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        myNFTsContext?.nft_card_day
-          .concat(myNFTsContext?.nft_card_month)
-          .concat(myNFTsContext?.nft_card_year)?.length > 0 ? (
+        myNFTsContext?.nft_card_day_month_data?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
@@ -70,9 +68,8 @@ export const DatesPage: React.FC = () => {
               </DatePageTitleWrapper>
               <FilterSection />
               <CardGridSection
-                data={myNFTsContext?.nft_card_day
-                  .concat(myNFTsContext?.nft_card_month)
-                  .concat(myNFTsContext?.nft_card_year)}
+                cardType="date"
+                data={myNFTsContext?.nft_card_day_month_data}
                 onCraft={handleCraft}
                 onSell={handleSell}
                 onView={handleView}

@@ -50,7 +50,7 @@ export const TriggersPage: React.FC = () => {
     <AppLayout>
       <SellConfirmModal open={modal} onClose={() => setModal(false)} />
       {currentUser ? (
-        myNFTsContext?.nft_card_trigger?.length > 0 ? (
+        myNFTsContext?.nft_card_trigger_data?.length > 0 ? (
           <DatesPageWrapper isview={isView ? "true" : undefined}>
             <DatePageContainer>
               <DatePageTitleWrapper>
@@ -72,7 +72,7 @@ export const TriggersPage: React.FC = () => {
               </DatePageTitleWrapper>
               <FilterSection />
               <CardGridSection
-                data={triggerCardData}
+                data={myNFTsContext?.nft_card_trigger_data}
                 cardType={"trigger"}
                 onCraft={handleCraft}
                 onSell={handleSell}

@@ -48,15 +48,16 @@ export const MCardGridSection: React.FC<{
                 ? { onSell: () => onCardClick(1, "sell") }
                 : { onBuy: () => onCardClick(1, "buy") };
             return (
-              <PredictionCard
-                height={293}
-                isNotHover={true}
-                {...identitiesData[key]}
-                key={key}
-                {...item}
-                onView={() => onCardClick(1, "view")}
-                {...func}
-              />
+              // <PredictionCard
+              //   height={293}
+              //   isNotHover={true}
+              //   {...identitiesData[key]}
+              //   key={key}
+              //   {...item}
+              //   onView={() => onCardClick(1, "view")}
+              //   {...func}
+              // />
+              <>asdf</>
             );
           }
         )}
@@ -69,15 +70,16 @@ export const MCardGridSection: React.FC<{
                 ? { onSell: () => onCardClick(1, "sell") }
                 : { onBuy: () => onCardClick(1, "buy") };
             return (
-              <PredictionCard
-                height={293}
-                isNotHover={true}
-                {...predictionData[key]}
-                key={key}
-                {...item}
-                onView={() => onCardClick(1, "view")}
-                {...func}
-              />
+              // <PredictionCard
+              //   height={293}
+              //   isNotHover={true}
+              //   {...predictionData[key]}
+              //   key={key}
+              //   {...item}
+              //   onView={() => onCardClick(1, "view")}
+              //   {...func}
+              // />
+              <>asdf</>
             );
           }
         )}

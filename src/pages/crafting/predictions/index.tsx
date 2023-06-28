@@ -124,7 +124,11 @@ export const CraftingPredictionsPage: React.FC = () => {
             </CraftLeftWrapper>
             <CraftRightWrapper>
               <MatchListSection page="prediction" clickedCard={clickedCard} />
-              <CardPreviewSection page="prediction" clickedCard={clickedCard} />
+              <CardPreviewSection
+                page="prediction"
+                clickedCard={clickedCard}
+                selectedCraft={selectedCraft}
+              />
             </CraftRightWrapper>
           </>
         ) : (

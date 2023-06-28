@@ -85,7 +85,9 @@ export const CardDateWrapper = styled.div`
   .date {
     border-radius: 5px 0px;
   }
-  .year {
+
+  .year,
+  .month {
     border-radius: 0 0 5px 5px;
     margin-left: 4px;
   }

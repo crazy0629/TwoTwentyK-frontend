@@ -1,4 +1,13 @@
 import api from "../config/api";
+import {
+  nft_card_category_data,
+  nft_card_crafting_data,
+  nft_card_day_month_data,
+  nft_card_identity_data,
+  nft_card_prediction_data,
+  nft_card_trigger_data,
+  nft_card_year_data,
+} from "../data/nfts";
 import type { LoginParams, RegisterParams } from "../types/actions";
 
 export const signin = async ({ username, password }: LoginParams) => {
@@ -46,10 +55,34 @@ export const updateMyInfo = async (arg: { [key: string]: string }) => {
 };
 
 export const getMyNFTs = async () => {
-  try {
-    const res = await api.get("/me/nft");
-    return { success: true, data: res.data };
-  } catch (error) {
-    return { success: false, message: "Server Error!" };
-  }
+  const myNFTsData = {
+    nft_card_category_data: nft_card_category_data.filter(
+      (f) => f.owner_id === 3
+    ),
+    nft_card_crafting_data: nft_card_crafting_data.filter(
+      (f) => f.owner_id === 3
+    ),
+    nft_card_day_month_data: nft_card_day_month_data.filter(
+      (f) => f.owner_id === 3
+    ),
+    nft_card_identity_data: nft_card_identity_data.filter(
+      (f) => f.owner_id === 3
+    ),
+    nft_card_prediction_data: nft_card_prediction_data.filter(
+      (f) => f.owner_id === 3
+    ),
+    nft_card_trigger_data: nft_card_trigger_data.filter(
+      (f) => f.owner_id === 3
+    ),
+    nft_card_year_data: nft_card_year_data.filter((f) => f.owner_id === 3),
+  };
+  // try {
+  //   const res = await api.get("/me/nft");
+
+  // return { success: true, data: res.data };
+  console.log(myNFTsData);
+  return { success: true, data: myNFTsData };
+  // } catch (error) {
+  //   return { success: false, message: "Server Error!" };
+  // }
 };

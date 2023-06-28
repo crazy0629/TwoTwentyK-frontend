@@ -44,6 +44,7 @@ export const CraftingIdentitesPage: React.FC = () => {
 
   useEffect(() => {
     if (params.get("id")) {
+      console.log(params.get("id"));
       setClickedCard(params.get("id"));
     }
   }, [params]);
@@ -117,7 +118,11 @@ export const CraftingIdentitesPage: React.FC = () => {
             </CraftLeftWrapper>
             <CraftRightWrapper>
               <MatchListSection page="identity" clickedCard={clickedCard} />
-              <CardPreviewSection page="identity" clickedCard={clickedCard} />
+              <CardPreviewSection
+                page="identity"
+                clickedCard={clickedCard}
+                selectedCraft={selectedCraft}
+              />
             </CraftRightWrapper>
           </>
         ) : (

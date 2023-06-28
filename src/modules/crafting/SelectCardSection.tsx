@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   CardGridWrapper,
   CraftCard,
@@ -12,9 +12,17 @@ import {
 import { Button, IconSort, SelectBox } from "../../components";
 import { craftingCardData, raritiesOption, statusOption } from "./data";
 import { SortButton } from "../app/dates/styles";
-import { useMarketplaceListContext } from "../../context";
+// import { useMarketplaceListContext, useMyNFTsContext } from "../../context";
 import { EmptyCards } from "../../pages/app/category/styles";
 import { useNavigate } from "react-router-dom";
+import {
+  nft_card_category_data,
+  nft_card_crafting_data,
+  nft_card_day_month_data,
+  nft_card_identity_data,
+  nft_card_trigger_data,
+  nft_card_year_data,
+} from "../../data/nfts";
 
 export const SelectCardSection: React.FC<{
   page: "identity" | "prediction";
@@ -32,12 +40,97 @@ export const SelectCardSection: React.FC<{
   onCardSelected,
 }) => {
   const navigate = useNavigate();
-  const { marketplaceListContext } = useMarketplaceListContext();
+  // const { marketplaceListContext } = useMarketplaceListContext();
+  const [nftData, setNftData] = useState<
+    {
+      id: number;
+      rarity: number;
+      image: string;
+      name: string | number;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    let tempData: {
+      id: number;
+      rarity: number;
+      image: string;
+      name: string | number;
+    }[] = [];
+    if (selectedCraft === "crafting") {
+      tempData = nft_card_crafting_data
+        .filter((f) => !f.is_crafted)
+        .map((item) => {
+          return {
+            id: item.id,
+            rarity: item.rarity,
+            image: item.image,
+            name: "Crafting",
+          };
+        });
+    } else if (selectedCraft === "dayMonth") {
+      tempData = nft_card_day_month_data
+        .filter((f) => !f.is_crafted)
+        .map((item) => {
+          return {
+            id: item.id,
+            rarity: item.rarity,
+            image: item.image,
+            name: item.day + "/" + item.month,
+          };
+        });
+    } else if (selectedCraft === "year") {
+      tempData = nft_card_year_data
+        .filter((f) => !f.is_crafted)
+        .map((item) => {
+          return {
+            id: item.id,
+            rarity: item.rarity,
+            image: item.image,
+            name: item.year,
+          };
+        });
+    } else if (selectedCraft === "category") {
+      tempData = nft_card_category_data
+        .filter((f) => !f.is_crafted)
+        .map((item) => {
+          return {
+            id: item.id,
+            rarity: item.rarity,
+            image: item.image,
+            name: item.category,
+          };
+        });
+    } else if (selectedCraft === "identity") {
+      tempData = nft_card_identity_data
+        .filter((f) => !f.is_crafted)
+        .map((item) => {
+          return {
+            id: item.id,
+            rarity: item.rarity,
+            image: item.image,
+            name: item.category,
+          };
+        });
+    } else if (selectedCraft === "trigger") {
+      tempData = nft_card_trigger_data
+        .filter((f) => !f.is_crafted)
+        .map((item) => {
+          return {
+            id: item.id,
+            rarity: item.rarity,
+            image: item.image,
+            name: item.trigger,
+          };
+        });
+    }
+    setNftData(tempData);
+  }, [selectedCraft]);
 
   return (
     <SelectCardSectionWrapper>
       <SelectCardSectionContainer>
-        {marketplaceListContext?.length > 0 ? (
+        {nftData?.length > 0 ? (
           <>
             <h2>
               Select a <span>{selectedCraft}</span> Card
@@ -62,26 +155,31 @@ export const SelectCardSection: React.FC<{
               </SortButton>
             </FilterWrapper>
             <CardGridWrapper>
-              {craftingCardData.map((item, key) => (
+              {nftData.map((item, key) => (
                 <CraftingCardWrapper
                   key={key}
-                  active={clickedCard === key ? "true" : undefined}
+                  active={clickedCard === item.id ? "true" : undefined}
                 >
-                  <CraftCard onClick={() => onCardClicked(key)} bg={item.image}>
-                    <span>{item.rarities}</span>
-                    <p>{selectedCraft}</p>
+                  <CraftCard
+                    onClick={() => onCardClicked(item.id)}
+                    bg={item.image}
+                  >
+                    {item.rarity === 0 && <span>Common</span>}
+                    {item.rarity === 1 && <span>Uncommon</span>}
+                    {item.rarity === 2 && <span>Rare</span>}
+                    <p>{item.name}</p>
                   </CraftCard>
                   <SelectButton
                     className="select-button"
                     disabled={
-                      clickedCard !== key || selectedCard === key
+                      clickedCard !== item.id || selectedCard === item.id
                       // ? "true"
                       // : undefined
                     }
                     onClick={
-                      clickedCard !== key || selectedCard === key
+                      clickedCard !== item.id || selectedCard === item.id
                         ? () => {}
-                        : () => onCardSelected(key, selectedCraft)
+                        : () => onCardSelected(item.id, selectedCraft)
                     }
                   >
                     Select

@@ -38,21 +38,27 @@ export type AppHeaderMenuItemProps = {
 };
 
 export type PredictionCardProps = {
-  date?: string;
-  year?: string | number;
-  type: string;
-  amount?: string | number;
-  image?: string;
-  name: string;
+  id?: number;
+  month?: number;
+  year?: number;
+  is_crafted?: boolean;
+  is_claimed?: boolean;
+  triggers?: string[];
+  owner_id?: number;
+  category?: string;
+  rarity?: number;
   height?: number;
+  day?: number;
+  celebrity_name?: string;
+  image?: string;
   icon?: React.ReactNode;
   iconText?: string;
   isNotHover?: boolean;
   onClick?: () => void;
-  onView?: () => void;
-  onCraft?: () => void;
-  onSell?: () => void;
-  onBuy?: () => void;
+  onView?: (id: number) => void;
+  onCraft?: (id: number) => void;
+  onSell?: (id: number) => void;
+  onBuy?: (id: number) => void;
 } & IMarketplaceListing;
 
 export type FeedItemProps = {
@@ -71,17 +77,35 @@ export type NotificationItemProps = {
 };
 
 export type DateCardProps = {
-  type: string;
+  id?: number;
+  category: string;
+  owner_id?: number;
+  day?: number;
+  month?: number;
+  rarity: number;
+  is_crafted?: boolean;
   image: string;
-  name: string;
   isNotHover?: boolean;
-  onView?: () => void;
-  onCraft?: () => void;
-  onSell?: () => void;
+  onView?: (id: number) => void;
+  onCraft?: (id: number) => void;
+  onSell?: (id: number) => void;
+};
+
+export type TriggerCardProps = {
+  id?: number;
+  trigger: string;
+  owner_id?: number;
+  rarity: number;
+  is_crafted?: boolean;
+  image: string;
+  isNotHover?: boolean;
+  onView?: (id: number) => void;
+  onCraft?: (id: number) => void;
+  onSell?: (id: number) => void;
 };
 
 export type DateCardGridProps = {
-  data?: Array<DateCardProps>;
+  data?: Array<any>;
   identityData?: Array<PredictionCardProps>;
   cardType?: string;
   onView?: (id: string | number) => void;

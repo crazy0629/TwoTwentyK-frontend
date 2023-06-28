@@ -36,12 +36,13 @@ export const SellDateCardSection: React.FC<SellDateCardProps> = ({
         <h2>Sell {cardType === "trigger" ? "Trigger" : "Date Card"}</h2>
         <PreviewCardWrapper>
           {cardType === "trigger" ? (
-            <TriggerCard image="" name="2005" type="Rare" isNotHover={true} />
+            <TriggerCard image="" trigger="2005" rarity={2} isNotHover={true} />
           ) : cardType === "identity" ? (
             <PredictionCard
-              date="06/06"
-              name="Athlete"
-              type="Rare"
+              day={6}
+              month={6}
+              category="Athlete"
+              rarity={2}
               height={293}
               year={2023}
               icon={<IconCardAthlete />}
@@ -49,19 +50,19 @@ export const SellDateCardSection: React.FC<SellDateCardProps> = ({
             />
           ) : cardType === "prediction" ? (
             <PredictionCard
-              date="06/06"
-              name="Tom Brady"
-              type="Rare"
+              day={6}
+              month={6}
+              category="Tom Brady"
+              rarity={2}
               height={293}
               year={2023}
-              amount={3}
               image="/assets/nfts/1.png"
             />
           ) : (
             <DateCard
               image="/assets/nfts/1.png"
-              name="2005"
-              type="Rare"
+              category="2005"
+              rarity={0}
               isNotHover={true}
             />
           )}
