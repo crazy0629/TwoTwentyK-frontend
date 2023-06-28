@@ -47,7 +47,7 @@ export const updateMyInfo = async (arg: { [key: string]: string }) => {
 
 export const getMyNFTs = async () => {
   try {
-    const res = await api.get("/me/nfts");
+    const res = await api.get("/me/nft");
     return { success: true, data: res.data };
   } catch (error) {
     return { success: false, message: "Server Error!" };
