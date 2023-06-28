@@ -32,14 +32,14 @@ export const CraftingPredictionsPage: React.FC = () => {
     dayMonth: number | string | null;
     category: number | string | null;
     identity: number | string | null;
-    trigger: number | string | null;
+    trigger: Array<number | string | null>;
   }>({
     crafting: -1,
     category: -1,
     dayMonth: -1,
     year: -1,
     identity: -1,
-    trigger: -1,
+    trigger: [],
   });
 
   useEffect(() => {
@@ -61,7 +61,11 @@ export const CraftingPredictionsPage: React.FC = () => {
   };
 
   const handleCardSelected = (id: string | number | null, craft: string) => {
-    setSelectedCards((prev) => ({ ...prev, [craft]: id }));
+    if (craft === "trigger") {
+      setSelectedCards((prev) => ({ ...prev, trigger: [...prev.trigger, id] }));
+    } else {
+      setSelectedCards((prev) => ({ ...prev, [craft]: id }));
+    }
     setSelectedCard(id);
   };
   const handleCraft = (page: "identity" | "prediction") => {
@@ -70,9 +74,9 @@ export const CraftingPredictionsPage: React.FC = () => {
 
   const craftPrediction = async () => {
     const newCraft = {
+      nft_card_crafting_id: Number(selectedCards.crafting),
       nft_card_identity_id: Number(selectedCards.identity),
       nft_card_trigger_ids: [Number(selectedCards.trigger)],
-      nft_card_crafting_id: Number(selectedCards.crafting),
     };
     const res = await craftingPrediction(newCraft);
     if (res.success) {

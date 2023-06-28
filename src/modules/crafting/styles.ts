@@ -73,7 +73,7 @@ export const EmptyCraftCard = styled.div<{ active?: string }>`
 export const CraftCardGroup = styled.div`
   padding-top: 30px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   & > :not(:first-child) {
     margin-left: 28px;
   }
@@ -379,4 +379,35 @@ export const TriggerListType = styled.div`
   font-weight: 600;
   line-height: 12.604px;
   text-transform: uppercase;
+`;
+
+export const AddTrigger = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  p {
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.5;
+    margin-left: 9px;
+  }
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 1.222px;
+    background: #fff;
+    box-shadow: 0.20369602739810944px 0.20369602739810944px 0.6110880374908447px
+        0px rgba(0, 0, 0, 0.2) inset,
+      0.20369602739810944px 0.20369602739810944px 3.259136438369751px 0px
+        rgba(51, 47, 255, 0.36) inset;
+    color: #bcbbeb50;
+    font-size: 23.361px;
+    font-weight: 500;
+    line-height: 20.558px;
+  }
 `;

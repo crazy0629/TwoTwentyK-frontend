@@ -28,14 +28,14 @@ export const CraftingIdentitesPage: React.FC = () => {
     dayMonth: number | string | null;
     category: number | string | null;
     identity: number | string | null;
-    trigger: number | string | null;
+    trigger: Array<number | string | null>;
   }>({
     crafting: -1,
     category: -1,
     dayMonth: -1,
     year: -1,
     identity: -1,
-    trigger: -1,
+    trigger: [],
   });
 
   useEffect(() => {

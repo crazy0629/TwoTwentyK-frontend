@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   EmptyCraftCard,
   CraftCardGroup,
@@ -6,6 +6,7 @@ import {
   CraftSectionWrapper,
   TitleWrapper,
   CraftCard,
+  AddTrigger,
 } from "./styles";
 import { Button } from "../../components";
 import { identityCraft, predictionCraft } from "./data";
@@ -18,13 +19,19 @@ export const CraftSection: React.FC<{
     dayMonth: number | string | null;
     category: number | string | null;
     identity: number | string | null;
-    trigger: number | string | null;
-    [key: string]: string | number | null;
+    trigger: Array<number | string | null>;
+    [key: string]: string | number | null | Array<string | number | null>;
   };
   onCraftChanged: (key: string) => void;
   onCraft: (page: "identity" | "prediction") => void;
   selectedCraft: string;
 }> = ({ page, onCraftChanged, selectedCraft, selectedCards, onCraft }) => {
+  const [isAdd, setIsAdd] = useState(false);
+
+  useEffect(() => {
+    setIsAdd(false);
+  }, [selectedCards]);
+
   return (
     <CraftSectionWrapper>
       <TitleWrapper>
@@ -37,8 +44,7 @@ export const CraftSection: React.FC<{
             disabled={
               !(
                 Number(selectedCards.crafting) > -1 &&
-                Number(selectedCards.day) > -1 &&
-                Number(selectedCards.month) > -1 &&
+                Number(selectedCards.dayMonth) > -1 &&
                 Number(selectedCards.category) > -1 &&
                 Number(selectedCards.year) > -1
               )
@@ -55,7 +61,7 @@ export const CraftSection: React.FC<{
               !(
                 Number(selectedCards.crafting) > -1 &&
                 Number(selectedCards.identity) > -1 &&
-                Number(selectedCards.trigger) > -1
+                selectedCards.trigger.length > 0
               )
             }
             onClick={() => onCraft(page)}
@@ -88,23 +94,101 @@ export const CraftSection: React.FC<{
               )}
             </CraftCardWrapper>
           ))}
-        {page === "prediction" &&
-          predictionCraft.map((item, key) => (
-            <CraftCardWrapper key={key}>
-              <h6>{item.title}</h6>
-              {Number(selectedCards[item.key]) > -1 ? (
-                <CraftCard bg={"/assets/nfts/1.png"} className="crafting-card">
-                  <span>Rare</span>
-                  <p>{item.title}</p>
-                </CraftCard>
-              ) : (
-                <EmptyCraftCard
-                  active={selectedCraft === item.key ? "true" : undefined}
-                  onClick={() => onCraftChanged(item.key)}
-                />
-              )}
-            </CraftCardWrapper>
-          ))}
+        {page === "prediction" && (
+          <>
+            {predictionCraft.map((item, key) => {
+              if (item.key !== "trigger")
+                return (
+                  <CraftCardWrapper key={key}>
+                    <h6>{item.title}</h6>
+                    {Number(selectedCards[item.key]) > -1 ? (
+                      <CraftCard
+                        bg={"/assets/nfts/1.png"}
+                        className="crafting-card"
+                      >
+                        <span>Rare</span>
+                        <p>{item.title}</p>
+                      </CraftCard>
+                    ) : (
+                      <EmptyCraftCard
+                        active={selectedCraft === item.key ? "true" : undefined}
+                        onClick={() => onCraftChanged(item.key)}
+                      />
+                    )}
+                  </CraftCardWrapper>
+                );
+              else
+                return (
+                  <>
+                    {selectedCards.trigger.length > 0 ? (
+                      selectedCards.trigger.map((tItem, key) => (
+                        <CraftCardWrapper key={key}>
+                          <h6>{item.title}</h6>
+                          <CraftCard
+                            bg={"/assets/nfts/1.png"}
+                            className="crafting-card"
+                          >
+                            <span>Rare</span>
+                            <p>{item.title}</p>
+                          </CraftCard>
+                        </CraftCardWrapper>
+                      ))
+                    ) : (
+                      <CraftCardWrapper key={key}>
+                        <h6>{item.title}</h6>
+                        <EmptyCraftCard
+                          active={
+                            selectedCraft === item.key ? "true" : undefined
+                          }
+                          onClick={() => {
+                            onCraftChanged(item.key);
+                          }}
+                        />
+                      </CraftCardWrapper>
+                    )}
+                    {isAdd && (
+                      <CraftCardWrapper key={key}>
+                        <h6>{item.title}</h6>
+                        <EmptyCraftCard
+                          active={
+                            selectedCraft === item.key ? "true" : undefined
+                          }
+                          onClick={() => {
+                            onCraftChanged(item.key);
+                          }}
+                        />
+                      </CraftCardWrapper>
+                    )}
+                  </>
+                );
+              // return (
+              //   <CraftCardWrapper key={key}>
+              //     <h6>{item.title}</h6>
+              //     {selectedCards.trigger.length > 0 ? (
+              //       <CraftCard
+              //         bg={"/assets/nfts/1.png"}
+              //         className="crafting-card"
+              //       >
+              //         <span>Rare</span>
+              //         <p>{item.title}</p>
+              //       </CraftCard>
+              //     ) : (
+              //       <EmptyCraftCard
+              //         active={selectedCraft === item.key ? "true" : undefined}
+              //         onClick={() => onCraftChanged(item.key)}
+              //       />
+              //     )}
+              //   </CraftCardWrapper>
+              // );
+            })}
+            {selectedCards.trigger.length > 0 && (
+              <AddTrigger onClick={() => setIsAdd(true)}>
+                <span>+</span>
+                <p>Add Trigger</p>
+              </AddTrigger>
+            )}
+          </>
+        )}
       </CraftCardGroup>
     </CraftSectionWrapper>
   );

@@ -56,7 +56,12 @@ export const TriggersPage: React.FC = () => {
               <DatePageTitleWrapper>
                 <h3>Triggers</h3>
                 <ButtonGroup>
-                  <Button className="buy-button">Buy Cards</Button>
+                  <Button
+                    className="buy-button"
+                    onClick={() => navigate("/marketplace")}
+                  >
+                    Buy Cards
+                  </Button>
                   <Button
                     className="buy-button"
                     onClick={() => navigate("/buy")}

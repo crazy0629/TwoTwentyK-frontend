@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Modal as ModalWrapper } from "./Modal";
 import type { WithdrawModalProps } from "../../types";
 import { BalanceForWithdrawModalWrapper, IconWrapper } from "./styles";
 import { IconPigMoney } from "../Icons";
 import { Button } from "../Button";
+import { useMyInfoContext } from "../../context";
 
 export const BalanceForWithdrawModal: React.FC<WithdrawModalProps> = ({
   onClose,
   onWithdraw,
   open,
 }) => {
+  const { myInfoContext } = useMyInfoContext();
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    setBalance(myInfoContext?.balance ? myInfoContext?.balance : 0);
+  }, [myInfoContext]);
   return (
     <ModalWrapper onClose={onClose} open={open} width={349}>
       <BalanceForWithdrawModalWrapper>
@@ -19,7 +26,12 @@ export const BalanceForWithdrawModal: React.FC<WithdrawModalProps> = ({
         </IconWrapper>
         <p>Your Balance</p>
         <h4>
-          $1.324.00 <span>USD</span>
+          $
+          {balance.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+          <span>USD</span>
         </h4>
         <Button className="withdraw-button" onClick={() => onWithdraw()}>
           Withdraw

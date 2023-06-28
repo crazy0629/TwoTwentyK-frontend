@@ -89,7 +89,12 @@ export const CategoriesPage: React.FC = () => {
           <EmptyCards>
             <h3>No Date Cards</h3>
             <p>It looks like you don’t have any category cards yet.  </p>
-            <Button className="buy-button">Buy Cards</Button>
+            <Button
+              className="buy-button"
+              onClick={() => navigate("/marketplace")}
+            >
+              Buy Cards
+            </Button>
             <Button className="buy-button" onClick={() => navigate("/buy")}>
               Buy Packs
             </Button>

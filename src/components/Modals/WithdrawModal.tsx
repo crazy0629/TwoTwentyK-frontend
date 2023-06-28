@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { EventHandler, useEffect, useState } from "react";
 import { Modal as ModalWrapper } from "./Modal";
 import { WithdrawModalProps } from "../../types";
 import {
@@ -11,17 +11,26 @@ import { Input } from "../Input";
 import { SelectBox } from "../SelectBox";
 import { Button } from "../Button";
 import { withdrawAccountList } from "./data";
+import { useMyInfoContext } from "../../context";
 
 export const WithdrawModal: React.FC<WithdrawModalProps> = ({
   onClose,
   onWithdraw,
   open,
 }) => {
-  const [amount, setAmount] = useState("1,400.00");
+  const { myInfoContext } = useMyInfoContext();
+  const [amount, setAmount] = useState<number>();
   const [account, setAccount] = useState<string | Array<string>>("");
   const [error, setError] = useState("");
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    if (myInfoContext)
+      setBalance(myInfoContext?.balance ? myInfoContext?.balance : 0);
+  }, [myInfoContext]);
+
   const handleWithdraw = () => {
-    if (amount === "") {
+    if (amount === 0) {
       setError("Amount exceeds available balance");
     } else {
       setError("");
@@ -29,8 +38,28 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({
     }
   };
 
+  function handleInputChange(e: any) {
+    !isNaN(e.target.value) && setAmount(e.target.value);
+    // const rawValue = parseFloat(
+    //   e.target.value.replace(/\./g, "").replace(",", ".")
+    // );
+    // // Parse the raw value as a number and replace any commas with periods
+    // if (!isNaN(rawValue)) {
+    //   const formattedValue = rawValue.toLocaleString("en-US", {
+    //     minimumFractionDigits: 2,
+    //     maximumFractionDigits: 2,
+    //   });
+    //   // Format the raw value as a currency string with two decimal places
+    //   setAmount(formattedValue);
+    //   // Update the input value with the formatted string
+    // } else {
+    //   setAmount("");
+    //   // Clear the input value if it's not a valid number
+    // }
+  }
+
   const handleClose = () => {
-    setAmount("");
+    setAmount(0);
     setAccount("");
     setError("");
     onClose();
@@ -45,7 +74,8 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({
             label="Set the amount"
             value={amount}
             error={error}
-            onChange={(e) => setAmount(e.target.value)}
+            placeholder="0"
+            onChange={handleInputChange}
           />
           <SelectBox
             border
@@ -59,7 +89,11 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({
         <AvailableAmount>
           <span>Available</span>
           <p>
-            1,324.00 <span>USD</span>
+            {balance.toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}{" "}
+            <span>USD</span>
           </p>
         </AvailableAmount>
         <ButtonGroup>
