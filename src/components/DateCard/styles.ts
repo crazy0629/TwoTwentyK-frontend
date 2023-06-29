@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 export const DateCardWrapper = styled.div<{ bg: string; isnothover?: string }>`
+  cursor: pointer;
   width: 100%;
   height: 293px;
   position: relative;

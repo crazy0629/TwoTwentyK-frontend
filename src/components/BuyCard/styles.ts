@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 export const BuyCardWrapper = styled.div`
+  cursor: pointer;
   box-shadow: 0px 0px 27.5768px rgba(0, 0, 0, 0.05);
   border-radius: 11px;
   height: 404px;

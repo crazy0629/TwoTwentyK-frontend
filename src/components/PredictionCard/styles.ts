@@ -5,6 +5,7 @@ export const PredictionCardWrapper = styled.div<{
   height?: number;
   isnothover?: string;
 }>`
+  cursor: pointer;
   position: relative;
   width: 100%;
   contain: content;
