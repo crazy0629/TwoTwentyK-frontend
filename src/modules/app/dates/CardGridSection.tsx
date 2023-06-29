@@ -2,6 +2,7 @@ import React from "react";
 import { CardGridWrapper } from "./styles";
 import { DateCardGridProps } from "../../../types";
 import { DateCard, PredictionCard } from "../../../components";
+import { CategoryCard } from "../../../components/CategoryCard";
 import { TriggerCard } from "../../../components/TriggerCard";
 import { useMarketplaceListContext } from "../../../context";
 import { IMarketplaceListing } from "../../../types/actions";
@@ -17,7 +18,18 @@ export const CardGridSection: React.FC<DateCardGridProps> = ({
   const { marketplaceListContext } = useMarketplaceListContext();
   return (
     <CardGridWrapper>
-      {(cardType === "category" || cardType === "date") &&
+      {(cardType === "category") &&
+        data?.map((item, key) => (
+          <CategoryCard
+            // {...data[key]}
+            key={key}
+            {...item}
+            onCraft={onCraft}
+            onView={onView}
+            onSell={onSell}
+          />
+        ))}
+      {(cardType === "date") &&
         data?.map((item, key) => (
           <DateCard
             // {...data[key]}

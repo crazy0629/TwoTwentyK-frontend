@@ -16,10 +16,9 @@ import {
 } from "../PredictionCard/styles";
 import { IconUserAdd } from "../Icons";
 
-export const DateCard: React.FC<DateCardProps> = ({
+export const CategoryCard: React.FC<DateCardProps> = ({
   image,
-  day,
-  month,
+  category,
   id = 0,
   is_crafted,
   owner_id,
@@ -38,7 +37,7 @@ export const DateCard: React.FC<DateCardProps> = ({
         {rarity === 1 && <CardTypeWrapper>Uncommon</CardTypeWrapper>}
         {rarity === 2 && <CardTypeWrapper>Rare</CardTypeWrapper>}
       </CardTopWrapper>
-      <CardBottomWrapper>{day + " / " + month}</CardBottomWrapper>
+      <CardBottomWrapper>{category}</CardBottomWrapper>
       <CardOverlayWrapper className="overlay">
         <CardButtonGroup>
           <CardTooltip>

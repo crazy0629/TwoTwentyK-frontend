@@ -402,7 +402,7 @@ export const nft_card_day_month_data = [
 export const nft_card_category_data = [
   {
     id: 49,
-    category: "Bored Ape1",
+    category: "Category1",
     owner_id: 2,
     rarity: 1,
     is_crafted: false,
@@ -410,7 +410,7 @@ export const nft_card_category_data = [
   },
   {
     id: 50,
-    category: "Bored Ape2",
+    category: "Category2",
     owner_id: 4,
     rarity: 0,
     is_crafted: true,
@@ -418,7 +418,7 @@ export const nft_card_category_data = [
   },
   {
     id: 51,
-    category: "Bored Ape3",
+    category: "Category3",
     owner_id: 4,
     rarity: 2,
     is_crafted: false,
@@ -426,7 +426,7 @@ export const nft_card_category_data = [
   },
   {
     id: 52,
-    category: "Bored Ape4",
+    category: "Category4",
     owner_id: 1,
     rarity: 1,
     is_crafted: false,
@@ -434,7 +434,7 @@ export const nft_card_category_data = [
   },
   {
     id: 53,
-    category: "Bored Ape5",
+    category: "Category5",
     owner_id: 4,
     rarity: 0,
     is_crafted: true,
@@ -442,7 +442,7 @@ export const nft_card_category_data = [
   },
   {
     id: 54,
-    category: "Bored Ape6",
+    category: "Category6",
     owner_id: 1,
     rarity: 2,
     is_crafted: true,
@@ -450,7 +450,7 @@ export const nft_card_category_data = [
   },
   {
     id: 55,
-    category: "Bored Ape7",
+    category: "Category7",
     owner_id: 3,
     rarity: 1,
     is_crafted: false,
@@ -458,7 +458,7 @@ export const nft_card_category_data = [
   },
   {
     id: 56,
-    category: "Bored Ape8",
+    category: "Category8",
     owner_id: 3,
     rarity: 2,
     is_crafted: false,
@@ -466,7 +466,7 @@ export const nft_card_category_data = [
   },
   {
     id: 57,
-    category: "Bored Ape9",
+    category: "Category9",
     owner_id: 2,
     rarity: 0,
     is_crafted: true,
@@ -474,7 +474,7 @@ export const nft_card_category_data = [
   },
   {
     id: 58,
-    category: "Bored Ape10",
+    category: "Category10",
     owner_id: 4,
     rarity: 1,
     is_crafted: false,
@@ -482,7 +482,7 @@ export const nft_card_category_data = [
   },
   {
     id: 59,
-    category: "Bored Ape11",
+    category: "Category11",
     owner_id: 1,
     rarity: 0,
     is_crafted: true,
@@ -490,7 +490,7 @@ export const nft_card_category_data = [
   },
   {
     id: 60,
-    category: "Bored Ape12",
+    category: "Category12",
     owner_id: 3,
     rarity: 2,
     is_crafted: false,
@@ -498,7 +498,7 @@ export const nft_card_category_data = [
   },
   {
     id: 61,
-    category: "Bored Ape13",
+    category: "Category13",
     owner_id: 2,
     rarity: 2,
     is_crafted: false,
@@ -506,7 +506,7 @@ export const nft_card_category_data = [
   },
   {
     id: 62,
-    category: "Bored Ape14",
+    category: "Category14",
     owner_id: 2,
     rarity: 1,
     is_crafted: true,
@@ -514,7 +514,7 @@ export const nft_card_category_data = [
   },
   {
     id: 63,
-    category: "Bored Ape15",
+    category: "Category15",
     owner_id: 4,
     rarity: 1,
     is_crafted: false,
@@ -522,7 +522,7 @@ export const nft_card_category_data = [
   },
   {
     id: 64,
-    category: "Bored Ape16",
+    category: "Category16",
     owner_id: 1,
     rarity: 0,
     is_crafted: false,
