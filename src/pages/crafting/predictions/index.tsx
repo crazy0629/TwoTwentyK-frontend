@@ -16,6 +16,7 @@ import { Button } from "../../../components";
 import { ToastContainer, toast } from "react-toastify";
 import { craftingPrediction, getMyNFTs } from "../../../actions";
 import { useMyNFTsContext } from "../../../context";
+import { myNFTsData } from "../../../data/nfts";
 
 export const CraftingPredictionsPage: React.FC = () => {
   const location = useLocation();
@@ -73,19 +74,59 @@ export const CraftingPredictionsPage: React.FC = () => {
   };
 
   const craftPrediction = async () => {
-    const newCraft = {
-      nft_card_crafting_id: Number(selectedCards.crafting),
-      nft_card_identity_id: Number(selectedCards.identity),
-      nft_card_trigger_ids: [Number(selectedCards.trigger)],
-    };
-    const res = await craftingPrediction(newCraft);
-    if (res.success) {
-      toast.success("Crafted Successfully.");
-      const myNFTs = await getMyNFTs();
-      setMyNFTsContext(myNFTs.data);
-    } else {
-      toast.error(res.message);
+    // const newCraft = {
+    //   nft_card_crafting_id: Number(selectedCards.crafting),
+    //   nft_card_identity_id: Number(selectedCards.identity),
+    //   nft_card_trigger_ids: [Number(selectedCards.trigger)],
+    // };
+    // const res = await craftingPrediction(newCraft);
+    // if (res.success) {
+    //   toast.success("Crafted Successfully.");
+    //   const myNFTs = await getMyNFTs();
+    //   setMyNFTsContext(myNFTs.data);
+    // } else {
+    //   toast.error(res.message);
+    // }
+
+    let card_crafting = myNFTsData.nft_card_crafting_data.find(v => v.id == selectedCards.crafting)
+    let card_identity = myNFTsData.nft_card_identity_data.find(v => v.id == selectedCards.identity)
+    let card_triggers = myNFTsData.nft_card_trigger_data.map(v => {
+      if (selectedCards.trigger.includes(Number(v))) { return v}
+    })
+
+    if (!card_crafting) {
+      toast.error("Error crafting");
+      return
     }
+
+    if (!card_identity) {
+      toast.error("Error crafting");
+      return
+    }
+
+    if (!card_triggers) {
+      toast.error("Error crafting");
+      return
+    }
+
+
+    // let triggers = card_triggers.map(v => {
+    //   if (v !== undefined) {
+    //   if (v.trigger !== undefined) {return v?.trigger }
+    //   }
+    // })
+
+    myNFTsData.nft_card_prediction_data.push({
+      id: 0,
+      rarity: 0,
+      is_claimed: false,
+      triggers: ["test"],
+      owner_id: 0,
+      celebrity_name: card_identity.celebrity_name,
+      image: ""
+    })
+
+    toast.success("Crafted Successfully.");
   };
 
   return (
