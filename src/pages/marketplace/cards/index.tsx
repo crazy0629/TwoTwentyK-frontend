@@ -44,7 +44,7 @@ export const MarketplacePage: React.FC = () => {
             </p>
             <Button
               className="buy-button"
-              onClick={() => navigate("/marketplace")}
+              onClick={() => setSide("sell")}
             >
               Sell Card
             </Button>
